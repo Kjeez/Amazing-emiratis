@@ -1,0 +1,50 @@
+.main { max-width: var(--max); margin: 0 auto; padding: 64px var(--gutter) 0; }
+
+/* ---------------------------------------------------------------- 02 hero */
+
+.hero { display: flex; flex-wrap: wrap; gap: 64px; align-items: center; padding-bottom: 80px; border-bottom: 1px solid var(--ink); }
+.heroText { flex: 1.2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 7.4vw, 120px); line-height: .92; letter-spacing: -.03em; }
+.title em { color: var(--gold); }
+.lede { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); max-width: 520px; }
+
+/* ---------------------------------------------------------------- 03 sample issue */
+
+.sampleWrap { flex: 1 1 380px; min-width: 0; display: flex; justify-content: center; }
+.sample {
+  width: min(100%, 420px);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 60px -30px rgba(26, 26, 26, .25);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: rotate(-1.5deg);
+}
+.sampleTop { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .14em; color: var(--muted); }
+.sampleMast { font-family: var(--serif); font-size: 26px; font-weight: 600; }
+.sampleMast em { font-weight: 500; color: var(--gold); }
+.sample .samplePh { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.sampleTitle { font-family: var(--serif); font-size: 22px; line-height: 1.2; }
+.sampleDek { font-size: 13px; line-height: 1.6; color: var(--body); }
+.sampleRule { height: 1px; background: var(--line); }
+.sampleAlso { font-size: 12px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- 04 past issues */
+
+.past { padding: 96px 0 0; }
+.issues { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.issue {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.issue:hover { color: var(--gold); }
+.issueNo { font-family: var(--serif); font-size: 22px; color: var(--gold); }
+.issueTitle { font-family: var(--serif); font-size: 21px; line-height: 1.3; }
+.issueDate { font-size: 13px; color: var(--muted); white-space: nowrap; }

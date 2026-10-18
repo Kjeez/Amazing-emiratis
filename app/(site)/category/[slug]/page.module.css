@@ -1,0 +1,44 @@
+/* 02 Category header */
+.header { padding: 56px 0 0; }
+
+.topRow { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: baseline; justify-content: space-between; margin-bottom: 40px; }
+.crumbs { display: flex; gap: 10px; font-size: 12px; color: var(--muted); }
+.crumbs a { color: var(--muted); }
+.crumbs a:hover { color: var(--gold); }
+.crumbCurrent { color: var(--ink); }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.tab { font-size: 13px; font-weight: 500; letter-spacing: .02em; padding: 4px 0; color: var(--ink); border-bottom: 1px solid transparent; }
+.tab[aria-current='page'] { color: var(--gold); border-bottom-color: var(--gold); }
+
+.titleRow { display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between; padding-bottom: 40px; border-bottom: 1px solid var(--ink); }
+.titleCol { display: flex; flex-direction: column; gap: 24px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(64px, 10vw, 168px); line-height: .88; letter-spacing: -.03em; }
+.dekCol { flex: 0 1 420px; display: flex; flex-direction: column; gap: 14px; padding-bottom: 10px; }
+.dek { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+.counts { font-size: 13px; color: var(--muted); }
+
+/* 03 Lead story */
+.lead { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; padding: 24px 0 0; }
+.leadImage { flex: 1.4 1 520px; display: block; }
+.leadImage:hover { color: var(--ink); }
+.leadPh.leadPh { padding: 14px; }
+.leadText { flex: 1 1 340px; display: flex; flex-direction: column; gap: 18px; }
+.leadTitle { font-family: var(--serif); font-size: clamp(32px, 3.4vw, 52px); line-height: 1.05; letter-spacing: -.015em; text-wrap: balance; }
+.leadDek { margin: 0; font-size: 16px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+.leadMeta { font-size: 13px; color: var(--muted); }
+
+/* shared small placeholder (cards, portraits) */
+.smallPh.smallPh { padding: 10px; font-size: 9px; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+
+/* 05 People */
+.people { padding: 112px 0 0; }
+.peopleHead { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; justify-content: space-between; margin-bottom: 40px; }
+.peopleTitle { margin: 0; font-family: var(--serif); font-size: clamp(36px, 4.4vw, 60px); font-weight: 400; letter-spacing: -.02em; }
+.peopleTitle em { color: var(--gold); }
+.peopleGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 32px; }
+.person { display: flex; flex-direction: column; gap: 10px; }
+.person:hover { color: var(--ink); }
+.personName { font-family: var(--serif); font-size: 22px; line-height: 1.15; margin-top: 6px; }
+.personRole { font-size: 13px; color: var(--muted); }

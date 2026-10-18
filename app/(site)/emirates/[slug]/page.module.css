@@ -1,0 +1,62 @@
+/* ---------------------------------------------------------------- hero */
+
+.hero { position: relative; min-height: min(78vh, 760px); display: flex; align-items: flex-end; overflow: hidden; background: repeating-linear-gradient(135deg, #3a3127 0 14px, #342c23 14px 28px); color: #fff; }
+.heroLabel { position: absolute; top: 24px; right: var(--gutter); font: 10px var(--mono); letter-spacing: .08em; color: rgba(255, 255, 255, .5); text-transform: uppercase; }
+.heroShade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17, 22, 27, 0) 35%, rgba(17, 22, 27, .85) 100%); }
+.heroInner { position: relative; width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) clamp(40px, 6vw, 72px); display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; justify-content: space-between; }
+.heroTitle { display: flex; flex-direction: column; gap: 16px; }
+.heroKicker { font-size: 12px; letter-spacing: .2em; color: var(--gold-light); }
+.name { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 10vw, 160px); line-height: .88; letter-spacing: -.03em; color: #fff; }
+.ar { font-family: var(--serif); font-size: 32px; color: rgba(255, 255, 255, .8); align-self: flex-start; }
+.blurb { flex: 0 1 420px; margin: 0; font-size: 17px; line-height: 1.6; color: rgba(255, 255, 255, .85); text-wrap: pretty; }
+
+/* ---------------------------------------------------------------- switcher */
+
+.switcher { border-bottom: 1px solid var(--line); background: var(--cream); }
+.switcherInner { display: flex; flex-wrap: wrap; gap: 0 32px; }
+.switchLink { padding: 20px 0; font-size: 14px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.switchLink:hover { color: var(--ink); }
+.switchLink[aria-current='page'] { color: var(--ink); border-bottom-color: var(--gold); }
+
+/* ---------------------------------------------------------------- people */
+
+.people { padding: 96px 0 0; }
+.peopleHead { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; justify-content: space-between; margin-bottom: 40px; }
+.peopleTitle { margin: 0; font-family: var(--serif); font-size: clamp(36px, 4.4vw, 60px); font-weight: 400; letter-spacing: -.02em; }
+.peopleGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 32px; }
+
+.card { display: flex; flex-direction: column; gap: 10px; }
+.card:hover { color: var(--gold); }
+.card .cardPh { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.cardEyebrow { font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--gold); margin-top: 6px; }
+.personName { font-family: var(--serif); font-size: 22px; line-height: 1.15; }
+.personRole { font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- places */
+
+.section { padding: 112px 0 0; }
+.places { display: flex; flex-wrap: wrap; gap: 24px; }
+.place { flex: 1 1 260px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.placeWide { flex: 2 1 420px; }
+.place .placePh { height: clamp(260px, 32vw, 440px); padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.placeName { font-family: var(--serif); font-size: 22px; }
+.placeNote { font-size: 14px; line-height: 1.55; color: var(--body); }
+
+/* ---------------------------------------------------------------- stories */
+
+.stories { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
+.storyTitle { font-family: var(--serif); font-size: 23px; line-height: 1.2; text-wrap: pretty; }
+
+@media (max-width: 480px) {
+  .stories { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------------------------------------------------------------- previous / next */
+
+.prevNext { margin-top: 112px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; border-top: 1px solid var(--ink); padding-top: 32px; }
+.pn { display: flex; flex-direction: column; gap: 6px; }
+.pnNext { text-align: right; margin-left: auto; }
+.pnLabel { font-size: 12px; letter-spacing: .16em; color: var(--muted); }
+.pnName { font-family: var(--serif); font-size: clamp(28px, 3vw, 44px); }
+
+.heroImg { object-fit: cover; animation: ae-kenburns 2.6s var(--ease-out) both; }

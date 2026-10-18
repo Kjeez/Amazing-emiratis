@@ -1,0 +1,81 @@
+/* 02 Story header */
+.header { max-width: 1080px; margin: 0 auto; padding: 64px var(--gutter) 48px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+.kicker { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 12px; letter-spacing: .16em; color: var(--gold); }
+.kickerLink { color: var(--gold); }
+.kickerLink:hover { color: var(--gold-dark); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 7vw, 108px); line-height: .96; letter-spacing: -.025em; text-wrap: balance; }
+.title em { color: var(--gold); }
+.dek { margin: 0; font-family: var(--serif); font-size: clamp(20px, 1.8vw, 26px); line-height: 1.45; color: var(--body); max-width: 760px; text-wrap: pretty; }
+.meta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 20px; font-size: 13px; color: var(--muted); margin-top: 8px; }
+.byline { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: repeating-linear-gradient(135deg, #e9e1d4 0 4px, #e2d8c7 4px 8px); border: 1px solid var(--gold); }
+.authorLink { color: var(--ink); font-weight: 600; }
+
+/* 03 Hero image */
+.hero { margin: 0 auto; max-width: var(--max); padding: 0 var(--gutter); }
+.heroPh.heroPh { padding: 16px; }
+.heroCaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px; padding-top: 12px; font-size: 12px; color: var(--muted); }
+
+/* 04 Body */
+.body { max-width: 1200px; margin: 0 auto; padding: 80px var(--gutter) 0; display: flex; flex-wrap: wrap; gap: 56px; justify-content: center; align-items: flex-start; }
+
+.subjects { flex: 0 1 240px; position: sticky; top: calc(var(--mast-offset, 96px) + 24px); transition: top .45s cubic-bezier(.2, .7, .2, 1); display: flex; flex-direction: column; gap: 20px; padding-top: 6px; }
+.subjectsTitle { font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--gold); padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+.subject { display: flex; gap: 12px; align-items: center; }
+.subject:hover { color: var(--gold); }
+.subjectPh { flex: 0 0 48px; height: 60px; background: repeating-linear-gradient(135deg, #e9e1d4 0 5px, #e2d8c7 5px 10px); }
+.subjectText { display: flex; flex-direction: column; gap: 3px; }
+.subjectName { font-family: var(--serif); font-size: 17px; line-height: 1.2; }
+.subjectRole { font-size: 12px; color: var(--muted); }
+
+.text { flex: 1 1 560px; min-width: 0; max-width: 680px; font-family: var(--serif); font-size: 20px; line-height: 1.75; color: var(--ink-soft); }
+.p { margin: 0 0 28px; text-wrap: pretty; }
+.text > .p:last-of-type { margin-bottom: 0; }
+.dropCap { float: left; font-size: 92px; line-height: .8; padding: 8px 12px 0 0; color: var(--gold); }
+
+.quote { margin: 56px 0; padding: 32px 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.quoteText { margin: 0; font-style: italic; font-size: clamp(28px, 3vw, 38px); line-height: 1.25; color: var(--gold-dark); text-wrap: balance; }
+.quoteCite { display: block; margin-top: 16px; font: 500 13px var(--sans); letter-spacing: .12em; font-style: normal; color: var(--muted); }
+
+.h2 { margin: 56px 0 20px; font-size: 32px; line-height: 1.2; font-weight: 500; color: var(--ink); }
+
+.figure { margin: 56px 0; }
+.figurePh.figurePh { padding: 14px; }
+.figureCaption { padding-top: 12px; font: 13px/1.5 var(--sans); color: var(--muted); }
+
+.pending { padding: 8px 0 0; }
+.pendingNote { margin: 0; font: 16px/1.6 var(--sans); color: var(--body); }
+.pendingLink { color: var(--gold); border-bottom: 1px solid currentColor; }
+.pendingLink:hover { color: var(--gold-dark); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+.tag { font: 500 13px var(--sans); padding: 8px 16px; border: 1px solid var(--line-strong); border-radius: 999px; white-space: nowrap; }
+.tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* 05 Author */
+.authorBox { display: flex; gap: 20px; align-items: flex-start; margin-top: 40px; padding: 28px; background: #f2ece4; }
+.authorAvatar { flex: 0 0 64px; height: 64px; border-radius: 50%; background: repeating-linear-gradient(135deg, #e9e1d4 0 5px, #e2d8c7 5px 10px); border: 1px solid var(--gold); }
+.authorText { display: flex; flex-direction: column; gap: 6px; }
+.authorName { font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+.authorBio { font: 14px/1.6 var(--sans); color: var(--body); text-wrap: pretty; }
+.authorMore { font: 600 13px var(--sans); color: var(--gold); margin-top: 4px; }
+.authorMore:hover { color: var(--gold-dark); }
+
+/* 06 Related */
+.related { max-width: var(--max); margin: 0 auto; padding: 120px var(--gutter) 0; }
+.relatedAll { font-size: 13px; font-weight: 500; }
+.relatedGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 40px; }
+.card { display: flex; flex-direction: column; gap: 12px; }
+.card:hover { color: var(--gold); }
+.cardPh.cardPh { padding: 10px; font-size: 9px; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.cardSub { font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--gold); margin-top: 6px; }
+.cardTitle { font-family: var(--serif); font-size: 22px; line-height: 1.2; text-wrap: pretty; }
+
+/* 07 Next story */
+.next { display: block; margin-top: 120px; background: var(--night); color: var(--cream); }
+.next:hover { color: var(--cream); }
+.nextInner { max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter); display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
+.nextText { flex: 1 1 520px; display: flex; flex-direction: column; gap: 16px; }
+.nextEyebrow { font-size: 12px; letter-spacing: .2em; color: var(--gold-light); }
+.nextTitle { font-family: var(--serif); font-size: clamp(32px, 4.4vw, 64px); line-height: 1.05; letter-spacing: -.015em; text-wrap: balance; }
+.nextArrow { width: 72px; height: 72px; border-radius: 50%; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--gold-light); }

@@ -1,0 +1,32 @@
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 64px var(--gutter) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+/* ---------------------------------------------------------------- 02 intro */
+
+.intro { flex: 1 1 400px; position: sticky; top: calc(var(--mast-offset, 96px) + 24px); transition: top .45s cubic-bezier(.2, .7, .2, 1); display: flex; flex-direction: column; gap: 24px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 7vw, 112px); line-height: .92; letter-spacing: -.03em; }
+.title em { color: var(--gold); }
+.lede { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); max-width: 460px; text-wrap: pretty; }
+.process { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--ink); max-width: 460px; }
+.processRow { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.processNum { font-family: var(--serif); font-size: 22px; color: var(--gold); }
+.processText { display: flex; flex-direction: column; gap: 4px; }
+.processTitle { font-weight: 600; font-size: 15px; }
+.processDesc { font-size: 14px; color: var(--body); line-height: 1.5; }
+
+/* ---------------------------------------------------------------- 03 form card */
+
+.formCard { flex: 1.2 1 480px; min-width: 0; background: #fff; border: 1px solid var(--line); padding: clamp(28px, 4vw, 56px); }
+
+/* The sticky intro would overlap the form once the columns stack. */
+@media (max-width: 1080px) {
+  .intro { position: static; }
+}

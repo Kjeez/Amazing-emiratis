@@ -1,0 +1,25 @@
+.chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 24px 0; }
+.chip { border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font: 500 13px var(--sans); padding: 9px 18px; border-radius: 999px; cursor: pointer; white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed='true'] { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* 04 Story grid */
+.grid { padding: 96px 0 0; }
+.sorts { display: flex; gap: 20px; }
+.sort { border: 0; background: transparent; cursor: pointer; padding: 0; font: 500 13px var(--sans); color: var(--muted); }
+.sort:hover { color: var(--ink); }
+.sort[aria-pressed='true'] { color: var(--ink); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 56px 40px; }
+.card { display: flex; flex-direction: column; gap: 12px; }
+.card:hover { color: var(--gold); }
+.cardPh.cardPh { padding: 10px; font-size: 9px; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.cardSub { font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--gold); margin-top: 6px; }
+.cardTitle { font-family: var(--serif); font-size: 23px; line-height: 1.2; text-wrap: pretty; }
+.cardMeta { font-size: 12px; color: var(--muted); }
+
+.empty { margin: 0; padding: 48px 0; font-family: var(--serif); font-size: 24px; color: var(--muted); }
+
+.more { display: flex; justify-content: center; padding-top: 64px; }
+.moreBtn { border: 1px solid var(--ink); background: transparent; padding: 14px 32px; border-radius: 999px; font: 600 13px var(--sans); cursor: pointer; color: var(--ink); white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease, color .15s ease; }
+.moreBtn:hover { background: var(--ink); color: var(--cream); }

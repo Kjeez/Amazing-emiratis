@@ -1,0 +1,132 @@
+/* ---------------------------------------------------------------- side menu */
+
+.menuRoot { position: fixed; inset: 0; z-index: 100; pointer-events: none; }
+.menuRoot[data-open='true'] { pointer-events: auto; }
+
+.scrim { position: absolute; inset: 0; background: rgba(17, 22, 27, .5); opacity: 0; transition: opacity .35s ease; }
+.menuRoot[data-open='true'] .scrim { opacity: 1; }
+
+.menu {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: min(440px, 88vw);
+  background: var(--night); color: var(--cream);
+  transform: translateX(-100%);
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+  display: flex; flex-direction: column;
+  overflow-y: auto; scrollbar-width: none;
+}
+.menu::-webkit-scrollbar { display: none; }
+.menuRoot[data-open='true'] .menu { transform: translateX(0); }
+
+.menuTop { display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; border-bottom: 1px solid rgba(248, 246, 241, .1); }
+.menuLogo { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+.menuLogo em { font-weight: 500; color: var(--gold-light); }
+.close { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(248, 246, 241, .25); background: transparent; color: var(--cream); cursor: pointer; font-size: 18px; transition: border-color .15s, color .15s; }
+.close:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+.menuNav { display: flex; flex-direction: column; padding: 24px 32px; }
+.menuItem { display: flex; align-items: baseline; gap: 18px; padding: 14px 0; border-bottom: 1px solid rgba(248, 246, 241, .08); color: var(--cream); }
+.menuItem:hover, .menuItem[aria-current='page'] { color: var(--gold-light); }
+.menuNum { font-size: 11px; letter-spacing: .1em; color: rgba(248, 246, 241, .45); min-width: 22px; }
+.menuLabel { font-family: var(--serif); font-size: 30px; line-height: 1.1; }
+
+.menuArchive { display: flex; flex-direction: column; gap: 12px; padding: 8px 32px 24px; }
+.menuEyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--gold-light); margin-bottom: 4px; }
+.menuLink { font-size: 14px; color: rgba(248, 246, 241, .75); }
+.menuLink:hover { color: var(--gold-light); }
+
+/* Menu entries cascade in each time the menu opens. */
+@keyframes menuIn { from { opacity: 0; transform: translate3d(-24px, 0, 0); } to { opacity: 1; transform: none; } }
+.menuRoot[data-open='true'] .menuItem,
+.menuRoot[data-open='true'] .menuLink,
+.menuRoot[data-open='true'] .menuBottom {
+  animation: menuIn .6s var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i, 13) * 40ms);
+}
+.menuItem .menuLabel { transition: transform .35s var(--ease-out); }
+.menuItem:hover .menuLabel { transform: translateX(8px); }
+
+.menuBottom { margin-top: auto; padding: 24px 32px 32px; display: flex; flex-direction: column; gap: 16px; border-top: 1px solid rgba(248, 246, 241, .1); }
+.socials { display: flex; gap: 20px; font-size: 13px; }
+.menuSocial { color: rgba(248, 246, 241, .6); }
+.menuSocial:hover { color: var(--gold-light); }
+
+/* ---------------------------------------------------------------- masthead */
+
+.masthead {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(248, 246, 241, .94);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  transition: transform .45s var(--ease-out), box-shadow .3s ease, background-color .3s ease;
+}
+.masthead[data-scrolled='true'] { background: rgba(248, 246, 241, .97); box-shadow: 0 12px 32px -22px rgba(17, 22, 27, .35); }
+.masthead[data-hidden='true'] { transform: translateY(-100%); box-shadow: none; }
+.mastInner {
+  max-width: var(--max); margin: 0 auto;
+  padding: 16px var(--gutter);
+  display: flex; flex-wrap: wrap; gap: 12px 40px; align-items: center; justify-content: space-between;
+}
+.brandRow { display: flex; align-items: center; gap: 18px; }
+.burger {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0;
+  transition: border-color .15s;
+}
+.burger:hover { border-color: var(--gold); }
+.burger span { width: 18px; height: 1.5px; background: var(--ink); transition: width .3s var(--ease-out); }
+.burger:hover span:nth-child(2) { width: 12px; }
+.burger:hover span:nth-child(3) { width: 6px; }
+.logo { font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.logo em { font-weight: 500; color: var(--gold); }
+
+.nav { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+/* Underline grows from the left on hover and stays on the current section. */
+.navLink {
+  font-size: 13px; font-weight: 500; letter-spacing: .02em; padding: 4px 0;
+  background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 1px no-repeat;
+  transition: background-size .4s var(--ease-out), color .2s ease;
+}
+.navLink:hover { background-size: 100% 1px; }
+.navLink[aria-current='page'] { color: var(--gold); background-size: 100% 1px; }
+
+.tools { display: flex; gap: 14px 20px; align-items: center; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.hijri { white-space: nowrap; }
+.lang { display: flex; gap: 8px; font-weight: 600; }
+.langOn { color: var(--ink); }
+.langOff { color: var(--muted); }
+.search {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; color: var(--ink);
+}
+.search:hover { border-color: var(--gold); color: var(--gold); }
+.search svg { transition: transform .35s var(--ease-out); }
+.search:hover svg { transform: rotate(-12deg) scale(1.08); }
+.nominate { color: var(--ink); font-size: 13px; font-weight: 600; padding: 9px 18px; border: 1px solid var(--ink); border-radius: 999px; white-space: nowrap; }
+.nominate:hover { background: var(--ink); color: var(--cream); }
+
+/* Laptops: the Hijri date is the first thing to go when space runs short. */
+@media (max-width: 1400px) {
+  .hijri { display: none; }
+}
+
+/* Tablets and small laptops: one row of menu, logo and tools; the sections live in the menu. */
+@media (max-width: 1180px) {
+  .hijri, .nav { display: none; }
+  .mastInner { flex-wrap: nowrap; }
+}
+
+/* Phones: one compact row — menu, logo, search. Sections, language and Nominate live in the menu. */
+@media (max-width: 760px) {
+  .mastInner { flex-wrap: nowrap; gap: 12px; padding-block: 10px; }
+  .brandRow { gap: 12px; min-width: 0; }
+  .burger { width: 40px; height: 40px; flex: 0 0 auto; }
+  .logo { font-size: 21px; }
+  .nav, .lang, .nominate { display: none; }
+  .tools { flex-wrap: nowrap; gap: 8px; }
+  .search { width: 40px; height: 40px; }
+}
+@media (max-width: 340px) {
+  .logo { font-size: 18px; }
+}

@@ -1,0 +1,29 @@
+.footer { margin-top: 120px; background: var(--night); color: var(--cream); overflow: hidden; }
+.inner { max-width: var(--max); margin: 0 auto; padding: 80px var(--gutter) 32px; }
+.cols { display: flex; flex-wrap: wrap; gap: 48px; }
+.lead { flex: 2 1 300px; display: flex; flex-direction: column; gap: 18px; }
+.tagline { font-family: var(--serif); font-size: 28px; line-height: 1.2; max-width: 360px; }
+.more { align-self: flex-start; color: var(--gold-light); font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--gold-light); padding-bottom: 2px; }
+.more:hover { color: var(--cream); border-color: var(--cream); }
+
+.subscribe { display: flex; flex-direction: column; gap: 8px; max-width: 380px; }
+.subscribeRow { display: flex; border-bottom: 1px solid rgba(197, 160, 89, .5); }
+.subscribeInput { flex: 1; min-width: 0; height: 46px; background: transparent; border: 0; outline: none; color: var(--cream); font: 15px var(--sans); }
+.subscribeInput::placeholder { color: rgba(248, 246, 241, .45); }
+.subscribeBtn { border: 0; background: transparent; color: var(--gold-light); font: 600 13px var(--sans); cursor: pointer; padding: 0 0 0 12px; }
+.subscribeBtn:hover { color: var(--cream); }
+.subscribeBtn:disabled { opacity: .6; cursor: default; }
+.error { margin: 0; font-size: 13px; color: #f0a48f; }
+.thanks { margin: 0; font-size: 15px; line-height: 1.6; color: var(--gold-light); max-width: 380px; }
+
+.col { flex: 1 1 150px; display: flex; flex-direction: column; gap: 12px; }
+.colTitle { font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--gold-light); margin-bottom: 6px; }
+.link { font-size: 14px; color: rgba(248, 246, 241, .72); }
+.link:hover { color: var(--gold-light); }
+
+.wordmark { margin-top: 88px; font-family: var(--serif); font-size: clamp(48px, 11.5vw, 190px); line-height: .9; letter-spacing: -.03em; white-space: nowrap; color: var(--gold-light); }
+.bottom { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(248, 246, 241, .1); font-size: 12px; color: rgba(248, 246, 241, .5); }
+
+/* A page whose last block is dark and should sit directly on the footer adds the global class "flushFooter" to it. */
+:global(.flushFooter) + .footer,
+:global(.pageEnter):has(> :global(.flushFooter):last-child) + .footer { margin-top: 0; }

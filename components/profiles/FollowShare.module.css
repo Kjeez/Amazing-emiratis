@@ -1,0 +1,14 @@
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+.follow, .share {
+  height: 46px; padding: 0 24px; border-radius: 999px;
+  display: inline-flex; align-items: center;
+  font: 600 13px var(--sans); cursor: pointer; white-space: nowrap; flex: 0 0 auto;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.follow { border: 1px solid var(--ink); background: var(--ink); color: #fff; }
+.follow[aria-pressed='true'] { border-color: var(--teal); background: var(--teal); }
+
+.share { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.share:hover { background: var(--ink); color: var(--cream); }

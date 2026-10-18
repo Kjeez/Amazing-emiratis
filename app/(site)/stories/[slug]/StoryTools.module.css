@@ -1,0 +1,10 @@
+.progress { position: fixed; top: var(--mast-offset, 0px); left: 0; right: 0; height: 2px; z-index: 51; background: transparent; pointer-events: none; transition: top .45s var(--ease-out); }
+.progressFill { height: 2px; background: var(--gold); transform-origin: left center; }
+
+.actions { display: flex; gap: 10px; align-items: center; justify-content: center; }
+.save, .share { height: 40px; padding: 0 16px; border-radius: 999px; font: 500 13px var(--sans); cursor: pointer; white-space: nowrap; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+.save { border: 1px solid var(--line-strong); background: transparent; color: var(--ink); }
+.save:hover { border-color: var(--gold); }
+.save[aria-pressed='true'] { border-color: var(--gold); background: var(--gold); color: #fff; }
+.share { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.share:hover { background: var(--ink); color: var(--cream); }

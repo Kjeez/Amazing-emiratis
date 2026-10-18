@@ -1,0 +1,31 @@
+.chips { display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 40px; }
+.chips .chip { padding: 9px 18px; white-space: nowrap; }
+
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--ink); }
+.row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) minmax(200px, 320px);
+  gap: 32px;
+  align-items: center;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+.row:hover { color: var(--ink); background: rgba(178, 136, 67, .05); }
+.date { display: flex; flex-direction: column; gap: 2px; }
+.day { font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--gold); }
+.month { font-size: 12px; font-weight: 600; letter-spacing: .14em; }
+.weekday { font-size: 12px; color: var(--muted); }
+.body { display: flex; flex-direction: column; gap: 10px; }
+.meta { font-size: 10px; font-weight: 600; letter-spacing: .16em; color: var(--gold); }
+.title { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 36px); line-height: 1.15; text-wrap: balance; }
+.row:hover .title { color: var(--ink); }
+.where { font-size: 14px; color: var(--body); }
+.list .ph { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.empty { padding: 32px 0; font-size: 15px; color: var(--muted); border-bottom: 1px solid var(--line); }
+
+/* The three-column row cannot fit a phone; put the image under the text. */
+@media (max-width: 720px) {
+  .row { grid-template-columns: 72px minmax(0, 1fr); gap: 20px; align-items: start; }
+  .day { font-size: 44px; }
+  .list .ph { grid-column: 1 / -1; }
+}

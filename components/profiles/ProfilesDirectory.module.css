@@ -1,0 +1,61 @@
+/* ---------------------------------------------------------------- filters */
+
+.filters { background: var(--cream); padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.search { flex: 1 1 280px; display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px; border: 1px solid var(--line-strong); background: #fff; transition: border-color .15s ease; }
+.search:focus-within { border-color: var(--gold); }
+.search svg { flex: 0 0 auto; }
+.searchInput { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: 15px var(--sans); color: var(--ink); }
+
+.select {
+  height: 48px; padding: 0 36px 0 14px; border: 1px solid var(--line-strong); border-radius: 0; background-color: #fff;
+  font: 14px var(--sans); color: var(--ink); cursor: pointer; outline: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 19px) 21px, calc(100% - 14px) 21px;
+  background-size: 5px 5px; background-repeat: no-repeat;
+}
+.select:focus { border-color: var(--gold); }
+
+.views { display: flex; border: 1px solid var(--line-strong); background: #fff; }
+.viewBtn { height: 46px; padding: 0 16px; border: 0; background: transparent; color: var(--ink); font: 500 13px var(--sans); cursor: pointer; white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease, color .15s ease; }
+.viewBtn[aria-pressed='true'] { background: var(--ink); color: var(--cream); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { white-space: nowrap; flex: 0 0 auto; }
+
+/* ---------------------------------------------------------------- results */
+
+.results { padding: 40px 0 0; }
+.count { display: block; font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 48px 32px; }
+.card { display: flex; flex-direction: column; gap: 10px; }
+.card:hover { color: var(--gold); }
+.portrait { position: relative; display: flex; flex-direction: column; }
+.portrait .cardPh { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.badge { position: absolute; top: 10px; left: 10px; background: var(--night); color: var(--gold-light); font: 600 10px var(--sans); letter-spacing: .12em; padding: 5px 8px; }
+.cardEyebrow { font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--gold); margin-top: 6px; }
+.cardName { font-family: var(--serif); font-size: 23px; line-height: 1.15; }
+.cardRole { font-size: 13px; color: var(--muted); }
+
+.list { display: flex; flex-direction: column; border-top: 1px solid var(--ink); }
+.listRow { display: grid; grid-template-columns: 56px minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.listRow:hover { color: var(--gold); background: rgba(178, 136, 67, .05); }
+.listRow .listPh { width: 56px; height: 70px; padding: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 5px, #e2d8c7 5px 10px); }
+.listName { font-family: var(--serif); font-size: 22px; }
+.listRole { font-size: 14px; color: var(--body); }
+.listCat { font-size: 11px; font-weight: 500; letter-spacing: .14em; color: var(--gold); }
+.listEmirate { font-size: 13px; color: var(--muted); }
+
+/* On phones the five columns cannot fit: stack the text beside the thumbnail. */
+@media (max-width: 640px) {
+  .listRow { grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; }
+  .listRow .listPh { grid-row: span 4; }
+}
+
+.empty { padding: 64px 0; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.emptyTitle { font-family: var(--serif); font-size: 28px; }
+.clear { border: 1px solid var(--ink); background: transparent; padding: 12px 24px; border-radius: 999px; font: 600 13px var(--sans); cursor: pointer; color: var(--ink); white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease, color .15s ease; }
+.clear:hover { background: var(--ink); color: var(--cream); }

@@ -1,0 +1,16 @@
+.header { padding: 64px 0 40px; display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid var(--ink); }
+.headerTitle { display: flex; flex-direction: column; gap: 20px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 9vw, 148px); line-height: .9; letter-spacing: -.03em; }
+.headerAside { flex: 0 1 420px; display: flex; flex-direction: column; gap: 14px; padding-bottom: 10px; }
+.intro { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+.totals { font-size: 13px; color: var(--muted); }
+
+.fallback { min-height: 400px; }
+
+.nominate { margin: 120px 0 0; background: var(--night); color: var(--cream); padding: clamp(32px, 5vw, 72px); display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
+.nominateText { flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px; }
+.nominateTitle { margin: 0; font-family: var(--serif); font-size: clamp(32px, 4vw, 52px); font-weight: 400; color: var(--cream); }
+.nominateBody { margin: 0; font-size: 16px; line-height: 1.6; color: rgba(248, 246, 241, .7); }
+.nominateBtn { background: var(--gold); color: var(--night); font-size: 14px; font-weight: 600; padding: 15px 30px; border-radius: 999px; white-space: nowrap; flex: 0 0 auto; }
+.nominateBtn:hover { background: var(--gold-light); color: var(--night); }

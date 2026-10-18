@@ -1,0 +1,44 @@
+.crumbs { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted); padding: 32px 0; }
+.crumbs a { color: var(--muted); }
+.crumbs a:hover { color: var(--gold); }
+.crumbHere { color: var(--ink); }
+
+.photo.photo { width: 100%; padding: 14px; }
+
+.layout { display: flex; flex-wrap: wrap; gap: 64px; padding-top: 56px; align-items: flex-start; }
+.content { flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; max-width: 760px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.4vw, 80px); line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+.about { margin: 0; font-family: var(--serif); font-size: 21px; line-height: 1.7; color: var(--ink-soft); text-wrap: pretty; }
+
+.block { padding-top: 24px; }
+
+.speakers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px; }
+.speaker { display: flex; gap: 14px; align-items: center; }
+.speakerPh { flex: 0 0 56px; height: 56px; border-radius: 50%; background: repeating-linear-gradient(135deg, #e9e1d4 0 5px, #e2d8c7 5px 10px); }
+.speakerText { display: flex; flex-direction: column; gap: 3px; }
+.speakerName { font-family: var(--serif); font-size: 18px; }
+.speakerRole { font-size: 12px; color: var(--muted); }
+
+.agenda { list-style: none; margin: 0; padding: 0; }
+.agendaRow { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.agendaTime { font: 500 14px var(--sans); color: var(--gold); }
+.agendaWhat { font-size: 15px; }
+
+.aside {
+  flex: 1 1 340px;
+  min-width: 0;
+  position: sticky;
+  top: calc(var(--mast-offset, 96px) + 14px);
+  transition: top .45s cubic-bezier(.2, .7, .2, 1);
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.facts { margin: 0; display: flex; flex-direction: column; gap: 20px; }
+.fact { display: flex; flex-direction: column; gap: 4px; padding-bottom: 16px; border-bottom: 1px solid #f2ece4; }
+.factKey { font-size: 11px; font-weight: 600; letter-spacing: .16em; color: var(--muted); }
+.factVal { margin: 0; font-size: 16px; line-height: 1.4; }

@@ -1,0 +1,28 @@
+/* ---------------------------------------------------------------- 02 page header */
+
+.header { max-width: var(--max); margin: 0 auto; padding: 64px var(--gutter) 40px; }
+.headerInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 64px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--ink);
+}
+.headerTitle { display: flex; flex-direction: column; gap: 22px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 9vw, 148px); line-height: .9; letter-spacing: -.03em; }
+.headerText { flex: 0 1 420px; display: flex; flex-direction: column; gap: 14px; padding-bottom: 10px; }
+.lede { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+.count { font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- past events */
+
+.past { padding: 112px 0 0; }
+.pastGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+.recap { display: flex; flex-direction: column; gap: 10px; }
+.recap:hover { color: var(--gold); }
+.pastGrid .recapPh { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); filter: grayscale(1); }
+.recapDate { font-size: 10px; font-weight: 600; letter-spacing: .16em; color: var(--muted); margin-top: 6px; }
+.recapTitle { font-family: var(--serif); font-size: 22px; line-height: 1.2; }

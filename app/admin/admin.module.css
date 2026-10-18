@@ -1,0 +1,31 @@
+.page { min-height: 100vh; background: var(--cream); }
+.header { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px var(--gutter); border-bottom: 1px solid var(--line); background: #fff; }
+.logo { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+.logo em { font-weight: 500; color: var(--gold); }
+.badge { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); border: 1px solid var(--teal); border-radius: 999px; padding: 4px 10px; }
+.logout { margin-left: auto; }
+.logout :global(.btn) { padding: 9px 18px; font-size: 13px; }
+.main { padding: 32px var(--gutter) 80px; max-width: 100%; }
+
+.card { max-width: 440px; margin: 64px auto; background: #fff; border: 1px solid var(--line); padding: 40px; display: flex; flex-direction: column; gap: 16px; }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 36px; }
+.note { margin: 0; color: var(--body); line-height: 1.6; font-size: 15px; }
+.note code { font-family: var(--mono); font-size: 13px; background: var(--cream); padding: 1px 5px; }
+.login { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+
+.tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; border-bottom: 1px solid var(--ink); margin-bottom: 24px; }
+.tab { padding: 0 0 12px; margin-bottom: -1px; font-family: var(--serif); font-size: 24px; color: #b0a796; border-bottom: 2px solid transparent; }
+.tab[aria-current='page'] { color: var(--ink); border-bottom-color: var(--gold); }
+.count { font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--muted); vertical-align: middle; }
+.export { margin-left: auto; margin-bottom: 12px; font-size: 13px; font-weight: 600; border-bottom: 1px solid currentColor; }
+
+.empty { color: var(--muted); font-size: 15px; }
+.tableWrap { overflow-x: auto; background: #fff; border: 1px solid var(--line); }
+.table { border-collapse: collapse; width: 100%; font-size: 13px; line-height: 1.5; }
+.table th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; background: var(--cream); position: sticky; top: 0; }
+.table td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.table tr:last-child td { border-bottom: 0; }
+.table a { color: var(--teal); }
+.long { min-width: 320px; max-width: 520px; white-space: pre-wrap; }
+.dim { color: var(--line-strong); }
+.nowrap { white-space: nowrap; }

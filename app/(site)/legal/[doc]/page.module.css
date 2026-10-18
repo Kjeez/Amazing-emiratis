@@ -1,0 +1,23 @@
+.wrap { max-width: 1200px; margin: 0 auto; padding: 64px var(--gutter) 0; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; }
+
+.nav { flex: 0 1 220px; position: sticky; top: calc(var(--mast-offset, 96px) + 24px); transition: top .45s cubic-bezier(.2, .7, .2, 1); display: flex; flex-direction: column; border-top: 1px solid var(--ink); }
+.navLink { padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 500; color: var(--ink); }
+.navLink[aria-current='page'] { color: var(--gold); }
+
+/* When the nav wraps above the article it should scroll away with the page, not stick over the text. */
+@media (max-width: 918px) {
+  .nav { position: static; flex-basis: 100%; }
+}
+
+.article { flex: 1 1 560px; max-width: 720px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.updated { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0 0 12px; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 6vw, 80px); line-height: .98; letter-spacing: -.02em; }
+.intro { margin: 0 0 16px; font-family: var(--serif); font-size: 22px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+
+.section { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line); }
+.sectionTitle { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 500; }
+.sectionBody { margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink-soft); text-wrap: pretty; }
+
+.closing { margin: 24px 0 0; font-size: 14px; color: var(--muted); }
+.mail { color: var(--muted); border-bottom: 1px solid currentColor; }
+.mail:hover { color: var(--gold); }

@@ -1,0 +1,2 @@
+.follow { height: 44px; padding: 0 22px; border-radius: 999px; border: 0; background: var(--ink); color: #fff; font: 600 13px var(--sans); cursor: pointer; white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease; }
+.follow[aria-pressed='true'] { background: var(--teal); }

@@ -1,0 +1,60 @@
+/* ---------------------------------------------------------------- header */
+
+.headerWrap { padding-block: 64px 40px; }
+.header { display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between; padding-bottom: 40px; border-bottom: 1px solid var(--ink); }
+.headerTitle { display: flex; flex-direction: column; gap: 22px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 9vw, 148px); line-height: .9; letter-spacing: -.03em; }
+.headerAside { flex: 0 1 420px; display: flex; flex-direction: column; gap: 14px; padding-bottom: 10px; }
+.intro { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+.meta { font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- mission */
+
+.mission { padding: 48px 0 0; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; }
+.missionImage { flex: 1 1 440px; display: flex; flex-direction: column; }
+.missionImage .missionPh { padding: 14px; }
+.missionText { flex: 1 1 480px; max-width: 640px; display: flex; flex-direction: column; gap: 24px; font-family: var(--serif); font-size: 21px; line-height: 1.7; color: var(--ink-soft); }
+.missionText p { margin: 0; text-wrap: pretty; }
+.missionText .missionLead { font-size: clamp(28px, 3vw, 40px); line-height: 1.25; color: var(--ink); text-wrap: balance; }
+
+/* ---------------------------------------------------------------- principles */
+
+.section { padding: 120px 0 0; }
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 48px; }
+.principle { display: flex; flex-direction: column; gap: 14px; }
+.principleNum { font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--gold); }
+.principleTitle { margin: 0; font-family: var(--serif); font-size: 28px; line-height: 1.15; font-weight: 400; }
+.principleBody { margin: 0; font-size: 15px; line-height: 1.65; color: var(--body); text-wrap: pretty; }
+
+/* ---------------------------------------------------------------- selection */
+
+.selection { display: flex; flex-wrap: wrap; gap: 56px; }
+.selectionHead { flex: 1 1 320px; display: flex; flex-direction: column; gap: 16px; }
+.selectionTitle { margin: 0; font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); font-weight: 400; line-height: 1; }
+.policyLink { align-self: flex-start; }
+.steps { flex: 2 1 520px; border-top: 1px solid var(--ink); list-style: none; margin: 0; padding: 0; }
+.step { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.stepNum { font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--gold); padding-top: 6px; }
+.stepText { display: flex; flex-direction: column; gap: 8px; }
+.stepTitle { font-family: var(--serif); font-size: 24px; }
+.stepBody { font-size: 15px; line-height: 1.6; color: var(--body); }
+
+/* ---------------------------------------------------------------- editors */
+
+.team { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 40px 32px; }
+.editor { display: flex; flex-direction: column; gap: 10px; }
+.editor:hover { color: var(--gold); }
+.editor .editorPh { padding: 10px; font-size: 9px; letter-spacing: 0; background: repeating-linear-gradient(135deg, #e9e1d4 0 10px, #e2d8c7 10px 20px); }
+.editorName { font-family: var(--serif); font-size: 22px; margin-top: 6px; }
+.editorRole { font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- contact */
+
+.contact { margin-top: 120px; background: #f2ece4; padding: clamp(40px, 6vw, 80px); display: flex; flex-wrap: wrap; gap: 40px; }
+.contactTitle { flex: 1 1 320px; margin: 0; font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); font-weight: 400; line-height: 1; }
+.contacts { flex: 2 1 520px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.contactItem { display: flex; flex-direction: column; gap: 8px; }
+.contactKey { font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--gold); }
+.contactValue { font-size: 16px; overflow-wrap: anywhere; }
+.contactNote { font-size: 13px; color: var(--muted); }

@@ -1,0 +1,14 @@
+.main { max-width: 1100px; margin: 0 auto; padding: 56px var(--gutter) 0; }
+
+.crumbs { display: flex; gap: 10px; font-size: 12px; color: var(--muted); margin-bottom: 40px; }
+.crumbs a { color: var(--muted); }
+.crumbs a:hover { color: var(--gold); }
+.crumbHere { color: var(--ink); }
+
+.closed { padding: 0 0 48px; display: flex; flex-direction: column; gap: 24px; align-items: flex-start; max-width: 760px; }
+.kicker { font-size: 12px; letter-spacing: .2em; color: var(--gold); }
+.closedTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 6vw, 88px); line-height: .95; letter-spacing: -.025em; }
+.closedTitle em { color: var(--gold); }
+.closedText { margin: 0; font-size: 17px; line-height: 1.6; color: var(--body); }
+.closedLink { height: 52px; padding: 0 28px; background: var(--ink); color: var(--cream); font: 600 14px var(--sans); display: flex; align-items: center; white-space: nowrap; }
+.closedLink:hover { color: var(--gold-light); }

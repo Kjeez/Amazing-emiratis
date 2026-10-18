@@ -1,0 +1,13 @@
+/* 06 Category newsletter */
+.box { margin: 112px 0 0; background: #f2ece4; padding: clamp(32px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between; }
+.text { flex: 1 1 360px; display: flex; flex-direction: column; gap: 10px; }
+.title { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3vw, 40px); font-weight: 400; }
+.desc { margin: 0; font-size: 15px; line-height: 1.6; color: var(--body); }
+.form { flex: 1 1 400px; max-width: 520px; display: flex; flex-wrap: wrap; gap: 10px; }
+.input { flex: 1 1 220px; min-width: 0; height: 52px; padding: 0 16px; border: 1px solid var(--line-strong); background: var(--cream); font: 15px var(--sans); color: var(--ink); outline: none; border-radius: 0; transition: border-color .15s ease; }
+.input:focus { border-color: var(--gold); }
+.button { height: 52px; padding: 0 28px; border: 0; background: var(--teal); color: #fff; font: 600 15px var(--sans); cursor: pointer; white-space: nowrap; flex: 0 0 auto; transition: background-color .15s ease; }
+.button:hover { background: var(--teal-dark); }
+.button:disabled { background: var(--disabled); cursor: not-allowed; }
+.error { flex: 1 1 100%; margin: 0; }
+.success { flex: 1 1 400px; max-width: 520px; margin: 0; font-size: 16px; color: var(--teal); }
