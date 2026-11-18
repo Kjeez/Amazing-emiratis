@@ -158,3 +158,49 @@
 
 /* Photograph behind the quote band. */
 .quoteImg { object-fit: cover; }
+
+/* ------------------------------------------------------------ Press releases strip */
+
+.press { background: #fff; border-bottom: 1px solid var(--line); }
+.pressInner { max-width: var(--max); margin: 0 auto; padding: 18px var(--gutter); display: flex; align-items: center; gap: 16px 32px; }
+.pressLabel { flex: 0 0 auto; margin: 0; display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--ink); }
+.pressDot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(178, 136, 67, .5); animation: pressPulse 2.4s ease-out infinite; }
+@keyframes pressPulse { 0% { box-shadow: 0 0 0 0 rgba(178, 136, 67, .5); } 70%, 100% { box-shadow: 0 0 0 10px rgba(178, 136, 67, 0); } }
+.pressList { flex: 1; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.pressItem { display: flex; flex-direction: column; gap: 4px; padding-left: 16px; border-left: 1px solid var(--line); }
+.pressDate { font-size: 10px; font-weight: 500; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.pressTitle { font-family: var(--serif); font-size: 15px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pressAll { flex: 0 0 auto; font-size: 13px; font-weight: 600; white-space: nowrap; }
+@media (max-width: 900px) {
+  .pressInner { flex-wrap: wrap; }
+  .pressList { order: 3; flex-basis: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 16px; }
+  .pressList::-webkit-scrollbar { display: none; }
+  .pressList > li { flex: 0 0 78%; scroll-snap-align: start; }
+  .pressAll { margin-left: auto; }
+}
+
+/* ------------------------------------------------------------ Young Women Entrepreneurs */
+
+.women { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 32px 24px; }
+@media (max-width: 1100px) { .women { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .women { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); gap: 20px; }
+  .women::-webkit-scrollbar { display: none; }
+  .women > * { flex: 0 0 62%; scroll-snap-align: start; }
+}
+
+/* ------------------------------------------------------------ Watch & Listen */
+
+.watch { margin-top: 128px; background: var(--night); color: var(--cream); padding: clamp(40px, 6vw, 88px) clamp(24px, 5vw, 72px); }
+.watchHead { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; justify-content: space-between; margin-bottom: 40px; }
+.watchTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 5.5vw, 84px); line-height: .95; letter-spacing: -.02em; color: var(--cream); }
+.watchTitle em { color: var(--gold-light); }
+.watchAll { color: var(--gold-light); font-size: 13px; font-weight: 600; }
+.watchAll:hover { color: var(--cream); }
+.watchBody { display: flex; flex-wrap: wrap; gap: 40px; }
+.watchFeatured { flex: 1.7 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.watchMeta { margin-top: 6px; font-size: 10px; font-weight: 500; letter-spacing: .16em; color: rgba(248, 246, 241, .55); }
+.watchFeaturedTitle { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 32px); line-height: 1.2; color: var(--cream); }
+.watchFeaturedTitle:hover { color: var(--gold-light); }
+.watchList { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+.watch + .awards { margin-top: 32px; }

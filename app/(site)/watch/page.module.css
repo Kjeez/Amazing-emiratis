@@ -1,0 +1,18 @@
+.hero { background: var(--night); color: var(--cream); padding: 72px 0 80px; }
+.heroInner { display: flex; flex-direction: column; gap: 48px; }
+.head { display: flex; flex-direction: column; gap: 18px; max-width: 760px; }
+.eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--gold-light); }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 9vw, 140px); line-height: .9; letter-spacing: -.03em; }
+.title em { color: var(--gold-light); }
+.intro { margin: 0; font-size: 17px; line-height: 1.6; color: rgba(248, 246, 241, .75); }
+
+.featured { display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: flex-end; }
+.featured > :first-child { flex: 2 1 560px; }
+.featuredText { flex: 1 1 280px; display: flex; flex-direction: column; gap: 14px; }
+.featuredMeta { font-size: 11px; letter-spacing: .16em; color: rgba(248, 246, 241, .55); }
+.featuredTitle { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 36px); line-height: 1.15; color: var(--cream); }
+.featuredTitle:hover { color: var(--gold-light); }
+.featuredSummary { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(248, 246, 241, .72); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px; padding: 40px 0 32px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 48px 32px; }

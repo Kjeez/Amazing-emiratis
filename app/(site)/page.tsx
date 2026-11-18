@@ -6,13 +6,18 @@ import Placeholder from '@/components/Placeholder';
 import EmiratesSwitcher, { type SwitcherEmirate } from '@/components/home/EmiratesSwitcher';
 import HeroCarousel, { type HeroSlide } from '@/components/home/HeroCarousel';
 import JoinArchiveForm from '@/components/home/JoinArchiveForm';
+import MediaCard from '@/components/media/MediaCard';
+import VideoEmbed from '@/components/media/VideoEmbed';
 import SectionTabs, { type SectionTab } from '@/components/home/SectionTabs';
 import { authorName } from '@/lib/content/authors';
 import { STORY_CATEGORY_LABEL, type StoryCategory } from '@/lib/content/categories';
 import { EMIRATES } from '@/lib/content/emirates';
+import { MASTER_STORIES } from '@/lib/content/master';
+import { MEDIA } from '@/lib/content/media';
 import { emiratePhoto, photo, storyPhoto } from '@/lib/content/photos';
-import { ARCHIVE_TOTALS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, type Person } from '@/lib/content/people';
-import { COVER_STORY_SLUG, getStory, MOST_READ, storiesByDate, storiesInCategory, type Story } from '@/lib/content/stories';
+import { getPressRelease, PRESS_RELEASES } from '@/lib/content/press';
+import { ARCHIVE_TOTALS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, YOUNG_WOMEN_ENTREPRENEURS, type Person } from '@/lib/content/people';
+import { COVER_STORY_SLUG, getStory, MOST_READ, shortDate, storiesByDate, storiesInCategory, type Story } from '@/lib/content/stories';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -21,17 +26,57 @@ export const metadata: Metadata = {
 
 const href = (s: Story) => `/stories/${s.slug}`;
 
-/** Lead stories that rotate in the hero after the cover story. */
-const HERO_LEADS = [
-  'family-offices-funding-next-generation-of-founders',
-  'calligrapher-restoring-sharjah-manuscripts',
-  'genome-programme-mapping-a-nations-health',
-  'mission-control-lunar-rover',
-];
+function storySlide(st: Story): HeroSlide {
+  return {
+    href: href(st),
+    eyebrow: st.cover ? `COVER STORY — ${st.sub.toUpperCase()}` : `${STORY_CATEGORY_LABEL[st.category].toUpperCase()} — ${st.sub.toUpperCase()}`,
+    title: st.title,
+    dek: st.dek,
+    byline: `By ${authorName(st.author)} · ${st.readMins} min read`,
+    photo: storyPhoto(st.slug),
+  };
+}
+
+/** Slides for the Master Stories hero, from lib/content/master.ts. */
+function masterSlides(): HeroSlide[] {
+  return MASTER_STORIES.flatMap((m): HeroSlide[] => {
+    if (m.kind === 'story') {
+      const st = getStory(m.story);
+      return st ? [storySlide(st)] : [];
+    }
+    if (m.kind === 'news') {
+      const pr = getPressRelease(m.press);
+      if (!pr) return [];
+      return [{
+        href: `/press/${pr.slug}`,
+        eyebrow: `NEWS — ${shortDate(pr.date).toUpperCase()}`,
+        title: pr.title,
+        dek: pr.summary,
+        byline: 'Press release',
+        photo: m.photo ? photo(m.photo) : undefined,
+      }];
+    }
+    const person = getPerson(m.person);
+    if (!person) return [];
+    const st = m.story ? getStory(m.story) : undefined;
+    const video = m.media ? MEDIA.find((x) => x.slug === m.media) : undefined;
+    const links: NonNullable<HeroSlide['links']> = [{ label: 'Read the profile', href: `/profiles/${person.slug}` }];
+    if (video) links.push({ label: 'Watch the video', href: `/watch/${video.slug}`, kind: 'video' });
+    return [{
+      href: st ? href(st) : `/profiles/${person.slug}`,
+      eyebrow: `MASTER STORY — PROFILE · ${person.category.toUpperCase()}`,
+      title: st?.title ?? person.name,
+      dek: person.short,
+      byline: st ? `${st.readMins} min read` : person.role,
+      photo: st ? storyPhoto(st.slug) : undefined,
+      links,
+    }];
+  });
+}
 
 const TABS: { label: string; category: StoryCategory; img: string }[] = [
   { label: 'Business', category: 'business', img: 'business feature 4:3' },
-  { label: 'Health', category: 'health', img: 'health feature 4:3' },
+  { label: 'Culture', category: 'culture', img: 'culture feature 4:3' },
   { label: 'Technology', category: 'tech', img: 'tech feature 4:3' },
 ];
 
@@ -50,25 +95,40 @@ function buildTabs(): SectionTab[] {
 }
 
 export default function HomePage() {
-  const cover = getStory(COVER_STORY_SLUG)!;
   const latest = storiesByDate().filter((s) => s.slug !== COVER_STORY_SLUG).slice(0, 4);
   const lead = getPerson(SPOTLIGHT_LEAD);
   const spotlight = SPOTLIGHT.map(getPerson).filter((p): p is Person => Boolean(p));
   const mostRead = MOST_READ.map(getStory).filter((s): s is Story => Boolean(s));
   const emirates: SwitcherEmirate[] = EMIRATES.map((e) => ({ slug: e.slug, name: e.name, ar: e.ar, landmark: e.landmark, short: e.short, count: e.count, photo: emiratePhoto(e.slug) }));
-  const heroSlides: HeroSlide[] = [cover, ...HERO_LEADS.map(getStory).filter((x): x is Story => Boolean(x))].map((st) => ({
-    href: href(st),
-    eyebrow: st.cover ? `COVER STORY — ${st.sub.toUpperCase()}` : `${STORY_CATEGORY_LABEL[st.category].toUpperCase()} — ${st.sub.toUpperCase()}`,
-    title: st.title,
-    dek: st.dek,
-    byline: `By ${authorName(st.author)} · ${st.readMins} min read`,
-    photo: storyPhoto(st.slug),
-  }));
+  const heroSlides = masterSlides();
+  const press = PRESS_RELEASES.slice(0, 3);
+  const women = YOUNG_WOMEN_ENTREPRENEURS.map(getPerson).filter((p): p is Person => Boolean(p));
+  const featuredVideo = MEDIA.find((m) => m.kind === 'video' && m.youtubeId);
+  const moreMedia = MEDIA.filter((m) => m !== featuredVideo).slice(0, 3);
   const dunes = photo('page/home-dunes');
 
   return (
     <>
       <HeroCarousel slides={heroSlides} />
+
+      <section className={styles.press} aria-labelledby="press-title">
+        <div className={styles.pressInner}>
+          <h2 id="press-title" className={styles.pressLabel}>
+            <span className={styles.pressDot} aria-hidden="true" />PRESS RELEASES
+          </h2>
+          <ul className={styles.pressList}>
+            {press.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/press/${p.slug}`} className={styles.pressItem}>
+                  <time dateTime={p.date} className={styles.pressDate}>{shortDate(p.date)}</time>
+                  <span className={styles.pressTitle}>{p.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link href="/press" className={styles.pressAll}>All releases →</Link>
+        </div>
+      </section>
 
       <main className={styles.main}>
         <section className={styles.latest} aria-label="Latest stories">
@@ -107,6 +167,25 @@ export default function HomePage() {
           </div>
         </section>
 
+        {women.length > 0 && (
+          <section className={styles.section} aria-labelledby="women-title">
+            <div className={styles.sectionHead}>
+              <h2 id="women-title" className={styles.h2}>Young Women <em className={styles.em}>Entrepreneurs</em></h2>
+              <Link href="/young-women-entrepreneurs" className="underlineLink">See the collection</Link>
+            </div>
+            <div className={styles.women}>
+              {women.map((p) => (
+                <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
+                  <Placeholder label="portrait 3:4" ratio="3/4" className={styles.cardPh} />
+                  <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
+                  <span className={styles.cardName}>{p.name}</span>
+                  <span className={styles.cardRole}>{p.role}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className={styles.section} aria-labelledby="emirates-title">
           <h2 id="emirates-title" className={`${styles.h2} ${styles.h2Block}`}>Seven <em className={styles.em}>Emirates</em></h2>
           <EmiratesSwitcher emirates={emirates} />
@@ -129,6 +208,25 @@ export default function HomePage() {
               ))}
             </ol>
           </aside>
+        </section>
+
+        <section className={styles.watch} aria-labelledby="watch-title">
+          <div className={styles.watchHead}>
+            <h2 id="watch-title" className={styles.watchTitle}>Watch <em>&amp;</em> Listen</h2>
+            <Link href="/watch" className={styles.watchAll}>All videos and podcasts →</Link>
+          </div>
+          <div className={styles.watchBody}>
+            {featuredVideo?.youtubeId && (
+              <div className={styles.watchFeatured}>
+                <VideoEmbed id={featuredVideo.youtubeId} title={featuredVideo.title} />
+                <span className={styles.watchMeta}>{[featuredVideo.label, featuredVideo.source].filter(Boolean).join(' · ').toUpperCase()}</span>
+                <Link href={`/watch/${featuredVideo.slug}`} className={styles.watchFeaturedTitle}>{featuredVideo.title}</Link>
+              </div>
+            )}
+            <div className={styles.watchList}>
+              {moreMedia.map((m) => <MediaCard key={m.slug} item={m} dark sizes="(max-width: 768px) 100vw, 30vw" />)}
+            </div>
+          </div>
         </section>
 
         <section className={styles.awards} aria-labelledby="awards-title">

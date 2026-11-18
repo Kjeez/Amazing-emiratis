@@ -13,7 +13,7 @@ export type SectionTab = {
   items: { href: string; cat: string; title: string }[];
 };
 
-/** Homepage section switcher (Business / Health / Technology). */
+/** Homepage section switcher (Business / Culture / Technology). */
 export default function SectionTabs({ tabs }: { tabs: SectionTab[] }) {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLButtonElement | null)[]>([]);

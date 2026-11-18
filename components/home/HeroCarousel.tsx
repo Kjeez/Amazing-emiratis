@@ -13,12 +13,14 @@ export type HeroSlide = {
   dek?: string;
   byline: string;
   photo?: Photo;
+  /** Extra calls to action, e.g. "Read the profile", "Watch the video". */
+  links?: { label: string; href: string; kind?: 'video' }[];
 };
 
 const INTERVAL_MS = 7000;
 
 /**
- * Homepage hero: featured stories crossfade one after another every few seconds, also under the
+ * Homepage Master Stories: profiles, stories and news crossfade one after another every few seconds, also under the
  * mouse. Swipe or use the arrow keys to move between them. It holds still while someone is
  * tabbing through it, and does not autoplay for people who prefer reduced motion.
  */
@@ -73,7 +75,7 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
     <section
       className={styles.hero}
       aria-roledescription="carousel"
-      aria-label="Featured stories"
+      aria-label="Master stories"
       data-no-rv
       onKeyDown={onKey}
       // Hold still only for keyboard focus, so a click on the headline link doesn't freeze it.
@@ -115,6 +117,18 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
           {s.dek && <p className={styles.dek}>{s.dek}</p>}
           <span className={styles.byline}>{s.byline}</span>
         </div>
+        {s.links && s.links.length > 0 && (
+          <div className={styles.links}>
+            {s.links.map((l) => (
+              <Link key={l.href} href={l.href} className={styles.cta} data-kind={l.kind}>
+                {l.kind === 'video' && (
+                  <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor" /></svg>
+                )}
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
     </section>

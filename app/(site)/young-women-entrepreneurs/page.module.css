@@ -1,0 +1,15 @@
+.header { display: flex; flex-direction: column; gap: 20px; padding: 64px 0 40px; border-bottom: 1px solid var(--ink); margin-bottom: 48px; }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 7.5vw, 116px); line-height: .92; letter-spacing: -.03em; }
+.intro { margin: 0; max-width: 640px; font-size: 17px; line-height: 1.65; color: var(--body); }
+
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 48px 32px; }
+.card { display: flex; flex-direction: column; gap: 10px; }
+.card:hover .name { color: var(--gold); }
+.meta { margin-top: 8px; font-size: 10px; font-weight: 500; letter-spacing: .16em; color: var(--gold); }
+.name { font-family: var(--serif); font-size: 24px; line-height: 1.15; transition: color .2s ease; }
+.role { font-size: 13px; color: var(--muted); }
+.short { font-size: 14px; line-height: 1.55; color: var(--body); }
+
+.cta { margin-top: 96px; padding: clamp(32px, 5vw, 64px); background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.ctaTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); }
+.ctaText { margin: 0; font-size: 16px; color: var(--body); }

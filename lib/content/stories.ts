@@ -1,4 +1,4 @@
-import { STORY_CATEGORY_LABEL, type StoryCategory } from './categories';
+import { isHiddenCategory, STORY_CATEGORY_LABEL, type StoryCategory } from './categories';
 import type { EmirateSlug } from './emirates';
 
 export type Story = {
@@ -18,7 +18,10 @@ export type Story = {
 };
 
 // Sample catalogue gathered from the design pages. Stories with a full body live in story-bodies.ts.
-export const STORIES: Story[] = [
+const ALL_STORIES: Story[] = [
+  // Leadership (compiled from the public record)
+  { slug: 'hamdan-bin-mohammed-crown-prince-poet-rider', title: 'Hamdan bin Mohammed: Crown Prince, Poet and Endurance Rider', category: 'leadership', sub: 'Profile', date: '2026-11-17', readMins: 6, dek: 'Dubai’s Crown Prince since 2008 and the UAE’s Minister of Defence since 2024 is also one of the country’s best-known poets, writing as Fazza.', emirate: 'dubai' },
+
   // Business
   { slug: 'family-offices-funding-next-generation-of-founders', title: 'The Family Offices Quietly Funding the Next Generation of Founders', category: 'business', sub: 'Finance', date: '2026-10-12', readMins: 11, author: 'hamad-al-suwaidi', dek: 'How second-generation investors are moving capital from real estate into climate tech, logistics and AI.', emirate: 'abu-dhabi' },
   { slug: 'from-souk-stall-to-series-b', title: 'From Souk Stall to Series B: A Spice Brand’s Long Road', category: 'business', sub: 'Entrepreneurship', date: '2026-10-02', readMins: 6, author: 'hamad-al-suwaidi', emirate: 'dubai' },
@@ -71,6 +74,9 @@ export const STORIES: Story[] = [
   { slug: 'coding-bootcamps-in-every-emirate', title: 'Coding Bootcamps Opening in Every Emirate', category: 'community', sub: 'Education', date: '2026-09-12', readMins: 5, emirate: 'ajman' },
   { slug: 'volunteers-who-plant-ghaf-trees', title: 'Volunteers Who Plant Ghaf Trees Every Winter', category: 'community', sub: 'Volunteering', date: '2026-08-24', readMins: 4, emirate: 'umm-al-quwain' },
 ];
+
+/** Published stories: everything outside hidden sections (see HIDDEN_CATEGORIES). */
+export const STORIES: Story[] = ALL_STORIES.filter((s) => !isHiddenCategory(s.category));
 
 export const COVER_STORY_SLUG = 'new-couture-of-the-desert';
 

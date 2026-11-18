@@ -1,5 +1,6 @@
 export type CategoryKey = 'business' | 'culture' | 'health' | 'lifestyle' | 'tech';
-export type StoryCategory = CategoryKey | 'community';
+/** Story categories; Leadership and Community have no section page. */
+export type StoryCategory = CategoryKey | 'leadership' | 'community';
 
 export type Category = {
   key: CategoryKey;
@@ -11,7 +12,13 @@ export type Category = {
   subs: string[];
 };
 
-export const CATEGORIES: Category[] = [
+/**
+ * Sections switched off for now (e.g. Health). Hidden sections disappear from navigation,
+ * listings, search and the sitemap; their pages return 404. Remove a key to bring it back.
+ */
+export const HIDDEN_CATEGORIES: StoryCategory[] = ['health'];
+
+const ALL_CATEGORIES: Category[] = [
   { key: 'business', label: 'Business', ar: 'أعمال', count: 64, people: 48, dek: 'Founders, investors and executives building the UAE economy, from family enterprises to venture-backed start-ups.', subs: ['Entrepreneurship', 'Finance', 'Energy', 'Leadership', 'Real Estate'] },
   { key: 'culture', label: 'Culture', ar: 'ثقافة', count: 52, people: 39, dek: 'Artists, writers, archivists and makers keeping Emirati heritage alive and pushing it somewhere new.', subs: ['Art', 'Literature', 'Heritage', 'Music', 'Film'] },
   { key: 'health', label: 'Health', ar: 'صحة', count: 41, people: 30, dek: 'Doctors, researchers and practitioners changing how the country prevents, treats and thinks about illness.', subs: ['Medicine', 'Research', 'Wellness', 'Mental Health', 'Nutrition'] },
@@ -19,12 +26,18 @@ export const CATEGORIES: Category[] = [
   { key: 'tech', label: 'Tech', ar: 'تقنية', count: 38, people: 27, dek: 'Engineers, scientists and founders working on AI, space, mobility and climate.', subs: ['AI', 'Space', 'Fintech', 'Mobility', 'Climate'] },
 ];
 
+/** Sections currently shown on the site. */
+export const CATEGORIES: Category[] = ALL_CATEGORIES.filter((c) => !HIDDEN_CATEGORIES.includes(c.key));
+
+export const isHiddenCategory = (key: string) => HIDDEN_CATEGORIES.includes(key as StoryCategory);
+
 export const STORY_CATEGORY_LABEL: Record<StoryCategory, string> = {
   business: 'Business',
   culture: 'Culture',
   health: 'Health',
   lifestyle: 'Lifestyle',
   tech: 'Tech',
+  leadership: 'Leadership',
   community: 'Community',
 };
 

@@ -5,7 +5,7 @@ export type PlaceHit = { key: string; name: string; ar: string; href: string; te
 export type SearchIndex = { profiles: ProfileHit[]; stories: StoryHit[]; places: PlaceHit[] };
 export type SearchResults = SearchIndex;
 
-export const POPULAR_SEARCHES = ['Heritage', 'Space', 'Fashion', 'Sharjah', 'Awards', 'Health'];
+export const POPULAR_SEARCHES = ['Heritage', 'Space', 'Fashion', 'Sharjah', 'Awards', 'Business'];
 
 export function normalise(s: string): string {
   return s

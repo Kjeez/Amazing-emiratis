@@ -74,6 +74,25 @@
 .dek { margin: 0; min-width: 0; font-size: 18px; line-height: 1.55; color: rgba(255, 255, 255, .88); max-width: 540px; text-wrap: pretty; }
 .byline { font-size: 13px; color: rgba(255, 255, 255, .78); }
 
+/* Calls to action on profile slides. */
+.links { display: flex; flex-wrap: wrap; gap: 10px; animation: ae-rise .9s var(--ease-out) .65s both; }
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .55);
+  color: #fff;
+  font: 600 13px var(--sans);
+  backdrop-filter: blur(6px);
+  background: rgba(17, 22, 27, .25);
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+.cta:hover { background: #fff; border-color: #fff; color: var(--night); }
+.cta[data-kind='video'] { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.cta[data-kind='video']:hover { background: var(--gold-light); border-color: var(--gold-light); }
+
 /* Phones: a shorter hero, tighter type, and shading that sits under the text at the bottom. */
 @media (max-width: 640px) {
   .hero { min-height: min(76svh, 620px); }

@@ -3,15 +3,18 @@ export type NavLink = { label: string; href: string };
 export const NAV: NavLink[] = [
   { label: 'Business', href: '/category/business' },
   { label: 'Culture', href: '/category/culture' },
-  { label: 'Health', href: '/category/health' },
   { label: 'Lifestyle', href: '/category/lifestyle' },
   { label: 'Tech', href: '/category/tech' },
+  { label: 'Watch', href: '/watch' },
   { label: 'Events', href: '/events' },
   { label: 'Awards', href: '/awards' },
 ];
 
 export const ARCHIVE_LINKS: NavLink[] = [
   { label: 'Profiles A–Z', href: '/profiles' },
+  { label: 'Young Women Entrepreneurs', href: '/young-women-entrepreneurs' },
+  { label: 'Watch & Listen', href: '/watch' },
+  { label: 'Press releases', href: '/press' },
   { label: 'Explore the Emirates', href: '/emirates/abu-dhabi' },
   { label: 'Join the Archive', href: '/join' },
   { label: 'Newsletter', href: '/newsletter' },
@@ -34,12 +37,15 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
       { label: 'Nominate', href: '/nominate' },
       { label: 'Events', href: '/events' },
       { label: 'Join the Archive', href: '/join' },
+      { label: 'Press releases', href: '/press' },
     ],
   },
   {
     title: 'EXPLORE',
     links: [
       { label: 'Profiles', href: '/profiles' },
+      { label: 'Watch & Listen', href: '/watch' },
+      { label: 'Young Women Entrepreneurs', href: '/young-women-entrepreneurs' },
       { label: 'The Emirates', href: '/emirates/abu-dhabi' },
       { label: 'Search', href: '/search' },
       { label: 'Newsletter', href: '/newsletter' },

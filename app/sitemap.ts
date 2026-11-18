@@ -4,13 +4,15 @@ import { CATEGORIES } from '@/lib/content/categories';
 import { EMIRATES } from '@/lib/content/emirates';
 import { EVENTS } from '@/lib/content/events';
 import { LEGAL_DOCS } from '@/lib/content/legal';
+import { MEDIA } from '@/lib/content/media';
 import { PEOPLE } from '@/lib/content/people';
+import { PRESS_RELEASES } from '@/lib/content/press';
 import { STORIES } from '@/lib/content/stories';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = (process.env.SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
   const paths = [
-    '/', '/ar', '/about', '/awards', '/nominate', '/join', '/newsletter', '/events', '/profiles', '/search', '/credits',
+    '/', '/ar', '/about', '/awards', '/nominate', '/join', '/newsletter', '/events', '/profiles', '/search', '/credits', '/watch', '/press', '/young-women-entrepreneurs',
     ...CATEGORIES.map((c) => `/category/${c.key}`),
     ...STORIES.map((s) => `/stories/${s.slug}`),
     ...PEOPLE.map((p) => `/profiles/${p.slug}`),
@@ -18,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...AUTHORS.map((a) => `/authors/${a.slug}`),
     ...EVENTS.map((e) => `/events/${e.slug}`),
     ...LEGAL_DOCS.map((d) => `/legal/${d.key}`),
+    ...MEDIA.map((m) => `/watch/${m.slug}`),
+    ...PRESS_RELEASES.map((p) => `/press/${p.slug}`),
   ];
   return paths.map((p) => ({ url: base + p }));
 }

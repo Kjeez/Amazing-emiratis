@@ -12,7 +12,7 @@ import { EMIRATE_OPTIONS } from '@/lib/content/site';
 export type ActionResult<T = object> = ({ ok: true } & T) | { ok: false; error: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const JOIN_FIELDS = ['Business', 'Culture', 'Health', 'Lifestyle', 'Technology', 'Community', 'Other'];
+const JOIN_FIELDS = ['Business', 'Culture', 'Lifestyle', 'Technology', 'Community', 'Other'];
 
 function clean(v: unknown, max = 500): string {
   return typeof v === 'string' ? v.trim().slice(0, max) : '';

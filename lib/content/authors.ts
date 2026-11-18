@@ -8,7 +8,7 @@ export type Author = {
   email: string;
 };
 
-export const AUTHORS: Author[] = [
+const ALL_AUTHORS: Author[] = [
   { slug: 'layla-al-hashimi', name: 'Layla Al Hashimi', role: 'Editor, Fashion & Culture', storyCount: 48, email: 'layla@amazingemiratis.ae',
     bio: 'Layla has covered fashion, design and culture in the Gulf for twelve years. Before joining Amazing Emiratis she was a features writer in Dubai and London.' },
   { slug: 'hamad-al-suwaidi', name: 'Hamad Al Suwaidi', role: 'Business Editor', storyCount: 36, email: 'hamad@amazingemiratis.ae',
@@ -18,6 +18,10 @@ export const AUTHORS: Author[] = [
   { slug: 'salem-al-hammadi', name: 'Dr. Salem Al Hammadi', role: 'Health Editor', storyCount: 22, email: 'salem@amazingemiratis.ae',
     bio: 'Salem is a physician and writer. He edits the health section and reports on medicine, research and public health.' },
 ];
+
+/** Editors whose section is hidden (see HIDDEN_CATEGORIES) are left out. */
+const HIDDEN_AUTHORS = ['salem-al-hammadi'];
+export const AUTHORS: Author[] = ALL_AUTHORS.filter((a) => !HIDDEN_AUTHORS.includes(a.slug));
 
 export function getAuthor(slug: string | undefined): Author | undefined {
   return slug ? AUTHORS.find((a) => a.slug === slug) : undefined;

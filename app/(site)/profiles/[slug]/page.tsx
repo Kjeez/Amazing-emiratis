@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import MediaCard from '@/components/media/MediaCard';
 import FollowShare from '@/components/profiles/FollowShare';
 import Placeholder from '@/components/Placeholder';
 import { storyPhoto } from '@/lib/content/photos';
-import type { StoryCategory } from '@/lib/content/categories';
+import { getCategory, type StoryCategory } from '@/lib/content/categories';
+import { getMedia, type MediaItem } from '@/lib/content/media';
 import { emirateName } from '@/lib/content/emirates';
 import { getPerson, PEOPLE, type PersonCategory } from '@/lib/content/people';
-import { storiesInCategory, storyHref } from '@/lib/content/stories';
+import { getStory, storiesInCategory, storyHref, type Story } from '@/lib/content/stories';
 import s from './page.module.css';
 
 export function generateStaticParams() {
@@ -25,9 +27,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-/** Category pages exist for every category except Community. */
+/** Link to the field's section page, or a search for fields without one (Leadership, Community). */
 function categoryHref(c: PersonCategory): string {
-  return c === 'Community' ? '/search?q=Community' : `/category/${c.toLowerCase()}`;
+  return getCategory(c.toLowerCase()) ? `/category/${c.toLowerCase()}` : `/search?q=${encodeURIComponent(c)}`;
 }
 
 export default async function ProfilePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -38,7 +40,10 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
   const emirate = emirateName(p.emirate);
   const emirateHref = `/emirates/${p.emirate}`;
   const catHref = categoryHref(p.category);
-  const stories = storiesInCategory(p.category.toLowerCase() as StoryCategory).slice(0, 3);
+  // Stories about this person come first, then the latest from their field.
+  const own = (p.stories ?? []).map(getStory).filter((x): x is Story => Boolean(x));
+  const stories = [...own, ...storiesInCategory(p.category.toLowerCase() as StoryCategory).filter((x) => !own.includes(x))].slice(0, 3);
+  const media = (p.media ?? []).map(getMedia).filter((x): x is MediaItem => Boolean(x));
   const related = PEOPLE.filter((x) => x.slug !== p.slug)
     .sort((a, b) => Number(b.category === p.category) - Number(a.category === p.category))
     .slice(0, 4);
@@ -83,9 +88,10 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
       <section className={s.body}>
         <div className={s.bio}>
-          <blockquote className={s.quote}>“{p.quote}”</blockquote>
+          {p.quote && <blockquote className={s.quote}>“{p.quote}”</blockquote>}
           <p className={s.para}>{p.bio}</p>
           <p className={s.para}>{p.bio2}</p>
+          {p.source && <p className={s.source}>{p.source}</p>}
         </div>
         <div className={s.milestones}>
           <h2 className={s.milestonesTitle}>MILESTONES</h2>
@@ -113,6 +119,17 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
                 <span className={s.storyTitle}>{st.title}</span>
               </Link>
             ))}
+          </div>
+        </section>
+      )}
+
+      {media.length > 0 && (
+        <section className={s.section}>
+          <div className={s.rule}>
+            <h2>WATCH &amp; LISTEN</h2>
+          </div>
+          <div className={s.stories}>
+            {media.map((m) => <MediaCard key={m.slug} item={m} />)}
           </div>
         </section>
       )}

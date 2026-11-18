@@ -26,7 +26,6 @@ const arDigits = (v: string | number) => String(v).replace(/\d/g, (d) => AR_DIGI
 const NAV: { label: string; href: string }[] = [
   { label: 'أعمال', href: '/category/business' },
   { label: 'ثقافة', href: '/category/culture' },
-  { label: 'صحة', href: '/category/health' },
   { label: 'أسلوب حياة', href: '/category/lifestyle' },
   { label: 'تقنية', href: '/category/tech' },
   { label: 'فعاليات', href: '/events' },

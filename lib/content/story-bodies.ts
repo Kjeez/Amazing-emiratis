@@ -20,6 +20,29 @@ export type StoryBody = {
 };
 
 export const STORY_BODIES: Record<string, StoryBody> = {
+  'hamdan-bin-mohammed-crown-prince-poet-rider': {
+    titleEm: 'Endurance Rider',
+    heroLabel: 'hero photograph 21:10 — Dubai',
+    heroCaption: 'Dubai.',
+    heroCredit: '',
+    subjects: [{ name: 'Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum', role: 'Crown Prince of Dubai' }],
+    tags: ['Leadership', 'Dubai', 'Poetry', 'Fazza', 'Equestrian'],
+    blocks: [
+      { type: 'p', dropCap: true, text: 'Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum was born in Dubai on 14 November 1982, the son of Sheikh Mohammed bin Rashid Al Maktoum and Sheikha Hind bint Maktoum bin Juma Al Maktoum. He was educated in Dubai, at the Rashid School for Boys and the Dubai School of Government, before continuing his studies in the United Kingdom.' },
+      { type: 'p', text: 'He graduated from the Royal Military Academy Sandhurst in 2001 and later attended the London School of Economics.' },
+      { type: 'h2', text: 'A life in public office' },
+      { type: 'p', text: 'His public career began early. He served as Deputy Ruler of Dubai from January 2006, and in September of that year was appointed Chairman of the Dubai Executive Council. On 1 February 2008 he was named Crown Prince of Dubai.' },
+      { type: 'p', text: 'In July 2024 his responsibilities widened to the federal government. He was appointed Deputy Prime Minister and Minister of Defence of the UAE, taking over the defence portfolio from his father, who had held it since the formation of the UAE in 1971.' },
+      { type: 'p', text: 'Among the initiatives associated with him is Dubai Global, launched in June 2022 to establish 50 commercial representative offices for Dubai across five continents.' },
+      { type: 'h2', text: 'Fazza' },
+      { type: 'p', text: 'Outside government he is widely known by his pen name, Fazza, under which he publishes romantic and patriotic poetry in Arabic. The name is commonly translated as “the one who helps”. He has recited his work in public, including at the Dubai Poetry Forum in 2011.' },
+      { type: 'p', text: 'His interest in the arts extends to photography: in 2011 he founded the Hamdan International Photography Award.' },
+      { type: 'h2', text: 'In the saddle' },
+      { type: 'p', text: 'He is also an accomplished endurance rider. He won individual gold at the Alltech FEI World Equestrian Games in Normandy in 2014, and a bronze medal at the 2010 Games, and has led teams of UAE riders at international championships.' },
+      { type: 'p', text: 'His other pursuits include skydiving, scuba diving off Fujairah, wildlife and photography, which he shares with more than 17 million followers on Instagram (as of April 2025).' },
+      { type: 'p', text: 'This profile was compiled from the public record. Amazing Emiratis has not interviewed Sheikh Hamdan for it.' },
+    ],
+  },
   'new-couture-of-the-desert': {
     titleEm: 'Desert',
     heroLabel: 'hero photograph 21:10 — designers in the studio',

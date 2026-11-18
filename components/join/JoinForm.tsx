@@ -6,7 +6,7 @@ import { applyToArchive } from '@/app/actions';
 import { EMIRATE_OPTIONS } from '@/lib/content/site';
 import styles from './JoinForm.module.css';
 
-const FIELDS = ['Business', 'Culture', 'Health', 'Lifestyle', 'Technology', 'Community', 'Other'];
+const FIELDS = ['Business', 'Culture', 'Lifestyle', 'Technology', 'Community', 'Other'];
 const MODES = [
   { value: 'myself', label: 'I’m applying for myself' },
   { value: 'someone-else', label: 'For someone else' },

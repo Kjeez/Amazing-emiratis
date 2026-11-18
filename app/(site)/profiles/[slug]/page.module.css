@@ -63,3 +63,5 @@
 @media (max-width: 480px) {
   .stories { grid-template-columns: minmax(0, 1fr); }
 }
+
+.source { margin: 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.6; color: var(--muted); }

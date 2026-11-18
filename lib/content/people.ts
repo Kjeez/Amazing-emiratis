@@ -1,6 +1,7 @@
+import { isHiddenCategory } from './categories';
 import type { EmirateSlug } from './emirates';
 
-export type PersonCategory = 'Business' | 'Culture' | 'Health' | 'Lifestyle' | 'Tech' | 'Community';
+export type PersonCategory = 'Leadership' | 'Business' | 'Culture' | 'Health' | 'Lifestyle' | 'Tech' | 'Community';
 
 export type Person = {
   slug: string;
@@ -14,17 +15,46 @@ export type Person = {
   winner: boolean;
   born: number;
   knownFor: string;
-  quote: string;
+  /** Only words the person has said on the record; leave out rather than paraphrase. */
+  quote?: string;
   bio: string;
   bio2: string;
   /** One-line summary used on cards. */
   short: string;
   milestones: [year: string, text: string][];
+  /** Stories about this person (slugs), shown first under "Featured in". */
+  stories?: string[];
+  /** Videos and podcast episodes about this person (slugs from media.ts). */
+  media?: string[];
+  /** Where the facts come from, for profiles compiled from the public record. */
+  source?: string;
 };
 
-export const PERSON_CATEGORIES: PersonCategory[] = ['Business', 'Culture', 'Health', 'Lifestyle', 'Tech', 'Community'];
+const ALL_PERSON_CATEGORIES: PersonCategory[] = ['Leadership', 'Business', 'Culture', 'Health', 'Lifestyle', 'Tech', 'Community'];
+export const PERSON_CATEGORIES = ALL_PERSON_CATEGORIES.filter((c) => !isHiddenCategory(c.toLowerCase()));
 
-export const PEOPLE: Person[] = [
+const ALL_PEOPLE: Person[] = [
+  {
+    // Compiled from the public record (Wikipedia, checked 18 November 2026). No quotes are attributed.
+    slug: 'hamdan-bin-mohammed', name: 'Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum', nameAr: 'الشيخ حمدان بن محمد بن راشد آل مكتوم',
+    role: 'Crown Prince of Dubai', roleAr: 'ولي عهد دبي', category: 'Leadership', emirate: 'dubai', winner: false, born: 1982,
+    knownFor: 'Public service, poetry as Fazza, endurance riding',
+    bio: 'Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum has been Crown Prince of Dubai since February 2008. In July 2024 he was also appointed Deputy Prime Minister and Minister of Defence of the UAE, succeeding his father, Sheikh Mohammed bin Rashid Al Maktoum, as defence minister.',
+    bio2: 'Known by his pen name Fazza, he writes romantic and patriotic poetry in Arabic. He is also a world champion endurance rider, winning individual gold at the 2014 FEI World Equestrian Games in Normandy, and founded the Hamdan International Photography Award in 2011.',
+    short: 'Crown Prince of Dubai, Minister of Defence of the UAE, and the poet known as Fazza.',
+    milestones: [
+      ['1982', 'Born in Dubai on 14 November'],
+      ['2001', 'Graduates from the Royal Military Academy Sandhurst'],
+      ['2006', 'Appointed Chairman of the Dubai Executive Council'],
+      ['2008', 'Becomes Crown Prince of Dubai'],
+      ['2011', 'Founds the Hamdan International Photography Award'],
+      ['2014', 'Individual endurance gold, FEI World Equestrian Games, Normandy'],
+      ['2024', 'Appointed Deputy Prime Minister and Minister of Defence of the UAE'],
+    ],
+    stories: ['hamdan-bin-mohammed-crown-prince-poet-rider'],
+    media: ['fazza-dubai-poetry-forum', 'dubai-future-solutions'],
+    source: 'Compiled from the public record. Amazing Emiratis has not interviewed Sheikh Hamdan for this profile.',
+  },
   {
     slug: 'mariam-al-falasi', name: 'Mariam Al Falasi', nameAr: 'مريم الفلاسي', role: 'AI Researcher', roleAr: 'باحثة في الذكاء الاصطناعي', category: 'Tech', emirate: 'abu-dhabi', winner: true, born: 1991,
     knownFor: 'Arabic speech recognition',
@@ -135,8 +165,56 @@ export const PEOPLE: Person[] = [
   },
 ];
 
+ALL_PEOPLE.push(
+  {
+    slug: 'reem-al-shehhi', name: 'Reem Al Shehhi', role: 'Founder, Shehhi Atelier', category: 'Lifestyle', emirate: 'dubai', winner: false, born: 1993,
+    knownFor: 'Heritage tailoring',
+    quote: 'People think you have to choose between heritage and modern. Here we never had to.',
+    bio: 'Reem Al Shehhi founded her own label in an Al Quoz warehouse, cutting abayas and kanduras from hand-woven sadu alongside Italian wool crepe.',
+    bio2: 'The atelier now shows in Paris and Milan and produces entirely in the UAE, employing artisans trained in talli braiding and embroidery.',
+    short: 'Runs a fashion label that takes heritage textiles to Paris and Milan.',
+    milestones: [['2016', 'Graduates in fashion design'], ['2019', 'Opens her Al Quoz studio'], ['2023', 'First show in Paris'], ['2026', 'Shows in Milan']],
+    stories: ['new-couture-of-the-desert'],
+  },
+  {
+    slug: 'mahra-al-ameri', name: 'Mahra Al Ameri', role: 'Founder, Bayt Al Bunn', category: 'Business', emirate: 'dubai', winner: false, born: 1996,
+    knownFor: 'Specialty coffee roasting',
+    quote: 'Gahwa was always our first welcome. I wanted the beans to be ours too.',
+    bio: 'Mahra Al Ameri started roasting coffee in a rented corner of an Al Quoz warehouse and now supplies cafés and hotels across the Emirates.',
+    bio2: 'Her roastery runs a training programme that has taught more than 200 young Emiratis to roast and brew.',
+    short: 'Built a specialty roastery from one rented corner in Al Quoz.',
+    milestones: [['2019', 'First roast in Al Quoz'], ['2021', 'Opens training academy'], ['2024', 'Supplies 60 cafés and hotels'], ['2026', 'Opens second roastery in Sharjah']],
+    stories: ['coffee-roasters-of-al-quoz'],
+  },
+  {
+    slug: 'latifa-al-mazrouei', name: 'Latifa Al Mazrouei', role: 'Co-founder, Ghaf Robotics', category: 'Tech', emirate: 'abu-dhabi', winner: false, born: 1997,
+    knownFor: 'Reforestation drones',
+    quote: 'A drone can plant in an hour what a team plants in a week. The ghaf does the rest.',
+    bio: 'Latifa Al Mazrouei co-founded Ghaf Robotics, which uses drones to seed native trees across degraded desert land.',
+    bio2: 'The company works with volunteer groups and landowners in four Emirates and has seeded more than a million native trees.',
+    short: 'Seeds native ghaf trees across the desert with drones.',
+    milestones: [['2019', 'Graduates in mechanical engineering'], ['2021', 'Co-founds Ghaf Robotics'], ['2023', 'First large-scale planting season'], ['2025', 'Passes one million seeds planted']],
+    stories: ['volunteers-who-plant-ghaf-trees'],
+  },
+  {
+    slug: 'noor-al-hammadi', name: 'Noor Al Hammadi', role: 'Founder, Sadu Lab', category: 'Business', emirate: 'sharjah', winner: false, born: 1995,
+    knownFor: 'Craft e-commerce',
+    quote: 'Our grandmothers sold through word of mouth. We just made the mouth bigger.',
+    bio: 'Noor Al Hammadi runs Sadu Lab, an online marketplace that sells hand-woven and embroidered work by Emirati craftswomen.',
+    bio2: 'More than 150 artisans sell through the platform, which handles photography, shipping and payments for them.',
+    short: 'Sells Emirati craftswomen’s work to buyers around the world.',
+    milestones: [['2018', 'Leaves banking to start Sadu Lab'], ['2020', 'Launches with 20 artisans'], ['2023', 'Ships to 30 countries'], ['2026', 'Passes 150 artisans']],
+  },
+);
+
+/** Profiles currently shown: everyone outside hidden sections. */
+export const PEOPLE: Person[] = ALL_PEOPLE.filter((p) => !isHiddenCategory(p.category.toLowerCase()));
+
+/** Homepage collection: young women entrepreneurs in the archive (slugs, in display order). */
+export const YOUNG_WOMEN_ENTREPRENEURS = ['alia-al-shamsi', 'reem-al-shehhi', 'mahra-al-ameri', 'latifa-al-mazrouei', 'noor-al-hammadi', 'hessa-al-nuaimi'];
+
 export const SPOTLIGHT_LEAD = 'mariam-al-falasi';
-export const SPOTLIGHT = ['khalid-al-mansoori', 'noura-al-ketbi', 'saeed-al-shamsi', 'omar-al-zaabi'];
+export const SPOTLIGHT = ['khalid-al-mansoori', 'saeed-al-shamsi', 'omar-al-zaabi', 'aisha-al-marri'];
 
 /** Total profiles in the archive (the sample data holds only a selection). */
 export const ARCHIVE_TOTALS = { profiles: 250, industries: 45 };
