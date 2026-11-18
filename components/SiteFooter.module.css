@@ -27,3 +27,6 @@
 /* A page whose last block is dark and should sit directly on the footer adds the global class "flushFooter" to it. */
 :global(.flushFooter) + .footer,
 :global(.pageEnter):has(> :global(.flushFooter):last-child) + .footer { margin-top: 0; }
+
+/* Gold geometric texture, strongest away from the text. */
+.footer { background: linear-gradient(180deg, var(--night) 20%, rgba(17, 22, 27, .86)), var(--pattern-star) 0 0 / 64px repeat, var(--night); }

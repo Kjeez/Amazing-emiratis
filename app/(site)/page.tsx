@@ -2,16 +2,18 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Countdown from '@/components/Countdown';
-import Placeholder from '@/components/Placeholder';
 import EmiratesSwitcher, { type SwitcherEmirate } from '@/components/home/EmiratesSwitcher';
 import HeroCarousel, { type HeroSlide } from '@/components/home/HeroCarousel';
+import IssueCover from '@/components/home/IssueCover';
 import JoinArchiveForm from '@/components/home/JoinArchiveForm';
 import MediaCard from '@/components/media/MediaCard';
 import VideoEmbed from '@/components/media/VideoEmbed';
 import SectionTabs, { type SectionTab } from '@/components/home/SectionTabs';
+import Portrait from '@/components/Portrait';
 import { authorName } from '@/lib/content/authors';
 import { STORY_CATEGORY_LABEL, type StoryCategory } from '@/lib/content/categories';
 import { EMIRATES } from '@/lib/content/emirates';
+import { AMAZING_100, amazing100 } from '@/lib/content/amazing-100';
 import { MASTER_STORIES } from '@/lib/content/master';
 import { MEDIA } from '@/lib/content/media';
 import { emiratePhoto, photo, storyPhoto } from '@/lib/content/photos';
@@ -103,6 +105,7 @@ export default function HomePage() {
   const heroSlides = masterSlides();
   const press = PRESS_RELEASES.slice(0, 3);
   const women = YOUNG_WOMEN_ENTREPRENEURS.map(getPerson).filter((p): p is Person => Boolean(p));
+  const list = amazing100();
   const featuredVideo = MEDIA.find((m) => m.kind === 'video' && m.youtubeId);
   const moreMedia = MEDIA.filter((m) => m !== featuredVideo).slice(0, 3);
   const dunes = photo('page/home-dunes');
@@ -140,6 +143,8 @@ export default function HomePage() {
           ))}
         </section>
 
+        <IssueCover />
+
         <section className={styles.section} aria-labelledby="spotlight-title">
           <div className={styles.sectionHead}>
             <h2 id="spotlight-title" className={styles.h2}>In the <em className={styles.em}>Spotlight</em></h2>
@@ -148,7 +153,7 @@ export default function HomePage() {
           <div className={styles.spotlight}>
             {lead && (
               <Link href={`/profiles/${lead.slug}`} className={styles.lead}>
-                <Placeholder label="lead portrait 4:5" ratio="4/5" className={styles.leadPh} />
+                <Portrait name={lead.name} nameAr={lead.nameAr} field={lead.category} ratio="4/5" size="lg" className={styles.leadPh} />
                 <span className="eyebrow">{lead.category.toUpperCase()}</span>
                 <span className={styles.leadName}>{lead.name}</span>
                 <span className={styles.leadBio}>{lead.short}</span>
@@ -157,7 +162,7 @@ export default function HomePage() {
             <div className={styles.spotGrid}>
               {spotlight.map((p) => (
                 <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
-                  <Placeholder label="portrait 3:4" ratio="3/4" className={styles.cardPh} />
+                  <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
                   <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
                   <span className={styles.cardName}>{p.name}</span>
                   <span className={styles.cardRole}>{p.role}</span>
@@ -176,7 +181,7 @@ export default function HomePage() {
             <div className={styles.women}>
               {women.map((p) => (
                 <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
-                  <Placeholder label="portrait 3:4" ratio="3/4" className={styles.cardPh} />
+                  <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
                   <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
                   <span className={styles.cardName}>{p.name}</span>
                   <span className={styles.cardRole}>{p.role}</span>
@@ -185,6 +190,28 @@ export default function HomePage() {
             </div>
           </section>
         )}
+
+        <section className={styles.list100} aria-labelledby="list100-title">
+          <div className={styles.list100Head}>
+            <span className="eyebrow">THE LIST · {AMAZING_100.year}</span>
+            <h2 id="list100-title" className={styles.list100Title}>
+              <span className={styles.list100Bar}>The Amazing</span> <span className={styles.list100Big}>100</span>
+            </h2>
+            <p className={styles.list100Text}>Emiratis shaping the country, named through the year. {list.length} of {AMAZING_100.size} named so far.</p>
+            <Link href="/amazing-100" className="btn btnDark">See the list →</Link>
+          </div>
+          <ol className={styles.list100Names}>
+            {list.slice(0, 8).map((p, i) => (
+              <li key={p.slug}>
+                <Link href={`/profiles/${p.slug}`} className={styles.list100Item}>
+                  <span className={styles.list100N}>{String(i + 1).padStart(3, '0')}</span>
+                  <span className={styles.list100Name}>{p.name}</span>
+                  <span className={styles.list100Role}>{p.role}</span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </section>
 
         <section className={styles.section} aria-labelledby="emirates-title">
           <h2 id="emirates-title" className={`${styles.h2} ${styles.h2Block}`}>Seven <em className={styles.em}>Emirates</em></h2>

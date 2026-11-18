@@ -12,6 +12,7 @@ export const NAV: NavLink[] = [
 
 export const ARCHIVE_LINKS: NavLink[] = [
   { label: 'Profiles A–Z', href: '/profiles' },
+  { label: 'The Amazing 100', href: '/amazing-100' },
   { label: 'Young Women Entrepreneurs', href: '/young-women-entrepreneurs' },
   { label: 'Watch & Listen', href: '/watch' },
   { label: 'Press releases', href: '/press' },
@@ -44,6 +45,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     title: 'EXPLORE',
     links: [
       { label: 'Profiles', href: '/profiles' },
+      { label: 'The Amazing 100', href: '/amazing-100' },
       { label: 'Watch & Listen', href: '/watch' },
       { label: 'Young Women Entrepreneurs', href: '/young-women-entrepreneurs' },
       { label: 'The Emirates', href: '/emirates/abu-dhabi' },

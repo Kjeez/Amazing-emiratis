@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { emiratePhoto, placePhoto, storyPhoto } from '@/lib/content/photos';
 import { EMIRATES, getEmirate } from '@/lib/content/emirates';
 import { PEOPLE, peopleInEmirate } from '@/lib/content/people';
@@ -84,7 +85,7 @@ export default async function EmiratePage({ params }: { params: Promise<{ slug: 
           <div className={s.peopleGrid}>
             {people.slice(0, 4).map((p) => (
               <Link key={p.slug} href={`/profiles/${p.slug}`} className={s.card}>
-                <Placeholder label="portrait 3:4" ratio="3/4" className={s.cardPh} />
+                <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={s.cardPh} />
                 <span className={s.cardEyebrow}>{p.category.toUpperCase()}</span>
                 <span className={s.personName}>{p.name}</span>
                 <span className={s.personRole}>{p.role}</span>

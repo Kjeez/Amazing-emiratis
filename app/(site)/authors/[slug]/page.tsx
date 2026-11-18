@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { storyPhoto } from '@/lib/content/photos';
 import { AUTHORS, getAuthor } from '@/lib/content/authors';
 import { categoryLabel, shortDate, storiesByAuthor } from '@/lib/content/stories';
@@ -33,7 +34,7 @@ export default async function AuthorPage({ params }: Props) {
   return (
     <main className={`container ${styles.main}`}>
       <section className={styles.header}>
-        <span className={styles.portrait} aria-hidden="true" />
+        <Portrait name={author.name} ratio="1/1" size="sm" className={styles.portrait} />
         <div className={styles.intro}>
           <span className={styles.role}>{author.role.toUpperCase()}</span>
           <h1 className={styles.name}>{author.name}</h1>

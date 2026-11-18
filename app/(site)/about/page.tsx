@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { photo } from '@/lib/content/photos';
 import { AUTHORS } from '@/lib/content/authors';
 import { CONTACTS } from '@/lib/content/site';
@@ -90,7 +91,7 @@ export default function AboutPage() {
           <div className={s.team}>
             {AUTHORS.map((a) => (
               <Link key={a.slug} href={`/authors/${a.slug}`} className={s.editor}>
-                <Placeholder label="portrait 4:5" ratio="4/5" className={s.editorPh} />
+                <Portrait name={a.name} field="Editor" ratio="4/5" className={s.editorPh} />
                 <span className={s.editorName}>{a.name}</span>
                 <span className={s.editorRole}>{a.role}</span>
               </Link>

@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ARCHIVE_LINKS, NAV, SOCIALS } from '@/lib/content/site';
+import type { MegaPanel } from '@/lib/mega-menu';
 import styles from './SiteHeader.module.css';
 
 function hijriToday() {
@@ -14,7 +16,7 @@ function hijriToday() {
   }
 }
 
-export default function SiteHeader() {
+export default function SiteHeader({ mega = {} }: { mega?: Record<string, MegaPanel> }) {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [open, setOpen] = useState(false);
@@ -131,9 +133,39 @@ export default function SiteHeader() {
             <Link href="/" className={styles.logo}>Amazing <em>Emiratis</em></Link>
           </div>
           <nav className={styles.nav} aria-label="Sections">
-            {NAV.map((n) => (
-              <Link key={n.href} href={n.href} className={styles.navLink} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</Link>
-            ))}
+            {NAV.map((n) => {
+              const panel = mega[n.href];
+              const link = <Link href={n.href} className={styles.navLink} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</Link>;
+              if (!panel) return <span key={n.href} className={styles.navItem}>{link}</span>;
+              return (
+                <span key={n.href} className={styles.navItem} data-mega>
+                  {link}
+                  {/* Opens on hover or keyboard focus (CSS :hover / :focus-within). */}
+                  <span className={styles.mega}>
+                    <span className={styles.megaInner}>
+                      <span className={styles.megaCol}>
+                        <span className={styles.megaTitle}>{panel.label}</span>
+                        <span className={styles.megaLinks}>
+                          {panel.links.map((l) => <Link key={l.label} href={l.href} className={styles.megaLink}>{l.label}</Link>)}
+                        </span>
+                        <Link href={panel.href} className={styles.megaAll}>All {panel.label} →</Link>
+                      </span>
+                      {panel.cards.map((c) => (
+                        <Link key={c.href} href={c.href} className={styles.megaCard}>
+                          <span className={styles.megaImg}>
+                            {c.img?.startsWith('/')
+                              ? <Image src={c.img} alt="" fill sizes="240px" />
+                              : c.img ? <img src={c.img} alt="" loading="lazy" /> : null}
+                          </span>
+                          <span className={styles.megaKicker}>{c.kicker}</span>
+                          <span className={styles.megaCardTitle}>{c.title}</span>
+                        </Link>
+                      ))}
+                    </span>
+                  </span>
+                </span>
+              );
+            })}
           </nav>
           <div className={styles.tools}>
             {isHome && (

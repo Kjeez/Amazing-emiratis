@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { emirateName } from '@/lib/content/emirates';
 import { getPerson, YOUNG_WOMEN_ENTREPRENEURS, type Person } from '@/lib/content/people';
 import styles from './page.module.css';
@@ -28,7 +28,7 @@ export default function YoungWomenEntrepreneursPage() {
         {people.map((p) => (
           <li key={p.slug}>
             <Link href={`/profiles/${p.slug}`} className={styles.card}>
-              <Placeholder label="portrait 4:5" ratio="4/5" />
+              <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="4/5" />
               <span className={styles.meta}>{p.category.toUpperCase()} · {emirateName(p.emirate).toUpperCase()}</span>
               <span className={styles.name}>{p.name}</span>
               <span className={styles.role}>{p.role}</span>

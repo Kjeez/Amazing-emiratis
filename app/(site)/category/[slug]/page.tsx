@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { storyPhoto } from '@/lib/content/photos';
 import { authorName } from '@/lib/content/authors';
 import { CATEGORIES, CATEGORY_PEOPLE, getCategory } from '@/lib/content/categories';
@@ -110,7 +111,7 @@ export default async function CategoryPage({ params }: Props) {
         <div className={styles.peopleGrid}>
           {CATEGORY_PEOPLE[cat.key].map(([name, role]) => (
             <Link key={name} href={personHref(name)} className={styles.person}>
-              <Placeholder label="portrait 3:4" ratio="3/4" className={styles.smallPh} />
+              <Portrait name={name} field={cat.label} ratio="3/4" size="sm" className={styles.smallPh} />
               <span className={styles.personName}>{name}</span>
               <span className={styles.personRole}>{role}</span>
             </Link>

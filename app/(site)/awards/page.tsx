@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AwardsFaq from '@/components/awards/AwardsFaq';
 import NominationCta from '@/components/awards/NominationCta';
 import Countdown from '@/components/Countdown';
-import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { AWARD_CATEGORIES, AWARDS_FAQ, AWARDS_TIMELINE, JURY_2026, WINNERS_2025 } from '@/lib/content/awards';
 import { getPerson } from '@/lib/content/people';
 import styles from './page.module.css';
@@ -18,7 +18,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 export default function AwardsPage() {
   const winners = WINNERS_2025.flatMap(([cat, slug]) => {
     const p = getPerson(slug);
-    return p ? [{ cat, name: p.name, role: p.role, href: `/profiles/${p.slug}` }] : [];
+    return p ? [{ cat, name: p.name, nameAr: p.nameAr, field: p.category, role: p.role, href: `/profiles/${p.slug}` }] : [];
   });
 
   return (
@@ -84,7 +84,7 @@ export default function AwardsPage() {
           <div className={styles.winners}>
             {winners.map((w) => (
               <Link key={w.href} href={w.href} className={styles.winner}>
-                <Placeholder label="winner portrait 3:4" ratio="3/4" className={styles.winnerPh} />
+                <Portrait name={w.name} nameAr={w.nameAr} field={w.field} ratio="3/4" className={styles.winnerPh} />
                 <span className={styles.winnerCat}>{w.cat}</span>
                 <span className={styles.winnerName}>{w.name}</span>
                 <span className={styles.winnerRole}>{w.role}</span>

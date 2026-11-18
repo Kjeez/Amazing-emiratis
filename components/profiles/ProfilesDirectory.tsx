@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { EMIRATES } from '@/lib/content/emirates';
 import { PERSON_CATEGORIES, type PersonCategory } from '@/lib/content/people';
 import s from './ProfilesDirectory.module.css';
@@ -151,7 +151,7 @@ export default function ProfilesDirectory({ people }: { people: DirectoryPerson[
             {results.map((p) => (
               <Link key={p.slug} href={`/profiles/${p.slug}`} className={s.card}>
                 <span className={s.portrait}>
-                  <Placeholder label="portrait 3:4" ratio="3/4" className={s.cardPh} />
+                  <Portrait name={p.name} field={p.category} ratio="3/4" className={s.cardPh} />
                   {p.winner && <span className={s.badge}>AWARDS 2025</span>}
                 </span>
                 <span className={s.cardEyebrow}>
@@ -168,7 +168,7 @@ export default function ProfilesDirectory({ people }: { people: DirectoryPerson[
           <div key={`${cat}|${emirate}`} className={`${s.list} swapIn`}>
             {results.map((p) => (
               <Link key={p.slug} href={`/profiles/${p.slug}`} className={s.listRow}>
-                <span className={`ph ${s.listPh}`} aria-hidden="true" />
+                <Portrait name={p.name} field={p.category} ratio="1/1" size="sm" className={s.listPh} />
                 <span className={s.listName}>{p.name}</span>
                 <span className={s.listRole}>{p.role}</span>
                 <span className={s.listCat}>{p.category.toUpperCase()}</span>

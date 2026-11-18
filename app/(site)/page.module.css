@@ -204,3 +204,22 @@
 .watchFeaturedTitle:hover { color: var(--gold-light); }
 .watchList { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
 .watch + .awards { margin-top: 32px; }
+
+/* Gold geometric texture on the dark bands, strongest away from the text. */
+.awards, .watch { background: linear-gradient(90deg, var(--night) 30%, rgba(17, 22, 27, .82)), var(--pattern-star) 0 0 / 64px repeat, var(--night); }
+
+/* ------------------------------------------------------------ The Amazing 100 teaser */
+
+.list100 { margin-top: 128px; display: flex; flex-wrap: wrap; gap: 40px 72px; padding: clamp(32px, 5vw, 64px); background: #fff; border: 1px solid var(--line); }
+.list100Head { flex: 1 1 320px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.list100Title { margin: 0; font-weight: 400; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 16px; }
+.list100Bar { font-family: var(--serif); font-style: italic; font-size: clamp(30px, 3.4vw, 48px); line-height: 1.2; color: #fff; background: var(--night); padding: 0 .25em; align-self: center; }
+.list100Big { font-family: var(--serif); font-size: clamp(96px, 12vw, 180px); line-height: .8; letter-spacing: -.05em; color: var(--gold); }
+.list100Text { margin: 0; font-size: 15px; line-height: 1.6; color: var(--body); max-width: 360px; }
+.list100Names { flex: 2 1 480px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; align-content: start; }
+.list100Item { display: grid; grid-template-columns: 48px 1fr; gap: 2px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.list100Item:hover .list100Name { color: var(--gold); }
+.list100N { grid-row: span 2; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--gold); }
+.list100Name { font-family: var(--serif); font-size: 18px; line-height: 1.25; transition: color .2s ease; }
+.list100Role { font-size: 12px; color: var(--muted); }
+@media (max-width: 640px) { .list100Names { grid-template-columns: 1fr; } }

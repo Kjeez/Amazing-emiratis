@@ -26,6 +26,9 @@
   --ease-curtain: cubic-bezier(.7, 0, .2, 1);
   /* Distance from the top of the window to the bottom of the masthead; 0 while it is tucked away. */
   --mast-offset: var(--mast-h, 77px);
+
+  /* Eight-point star (khatam) tile in gold hairlines, for portrait cards and dark bands. */
+  --pattern-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23C5A059' stroke-width='.8'%3E%3Cpath d='M30 8l6.36 15.64L52 30l-15.64 6.36L30 52l-6.36-15.64L8 30l15.64-6.36z'/%3E%3Cpath d='M14.44 14.44h31.12v31.12H14.44z' transform='rotate(0 30 30)'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Cpath d='M0 0l8 8M60 0l-8 8M0 60l8-8M60 60l-8-8'/%3E%3C/g%3E%3C/svg%3E");
 }
 :root[data-mast-hidden] { --mast-offset: 0px; }
 
@@ -107,6 +110,63 @@ img { max-width: 100%; }
 @media (hover: hover) {
   a:hover .ph::before, a.ph:hover::before { transform: scale(1.06); }
 }
+
+/* ---------------------------------------------------------------- portrait cards */
+
+/*
+ * Designed stand-in for a person's portrait (components/Portrait.tsx): initials in gold over an
+ * eight-point-star pattern, tinted by field. The pattern sits on ::before so it zooms on hover.
+ */
+.ph.portraitCard {
+  --pt-a: #1d2329;
+  --pt-b: #11161b;
+  container-type: inline-size;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 9% 9% 8%;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  text-transform: none;
+  letter-spacing: 0;
+  background:
+    radial-gradient(120% 80% at 85% 10%, rgba(197, 160, 89, .28), transparent 60%),
+    linear-gradient(160deg, var(--pt-a), var(--pt-b));
+}
+/* Page stylesheets give placeholders stripes with two-class selectors; the card must win. */
+.ph.portraitCard.portraitCard.portraitCard {
+  padding: 9% 9% 8%;
+  background:
+    radial-gradient(120% 80% at 85% 10%, rgba(197, 160, 89, .28), transparent 60%),
+    linear-gradient(160deg, var(--pt-a), var(--pt-b));
+}
+.ph.portraitCard.portraitCard.portraitCard[data-size='sm'] { padding: 10%; }
+.ph.portraitCard::before {
+  background: var(--pattern-star) center / 26% auto repeat;
+  opacity: .5;
+  mask-image: linear-gradient(200deg, #000 10%, transparent 75%);
+}
+.ph.portraitCard[data-field='leadership'] { --pt-a: #2b2316; --pt-b: #11161b; }
+.ph.portraitCard[data-field='business'] { --pt-a: #0e3d36; --pt-b: #0a1f1d; }
+.ph.portraitCard[data-field='culture'] { --pt-a: #4a2524; --pt-b: #1c1112; }
+.ph.portraitCard[data-field='lifestyle'] { --pt-a: #5a3f2c; --pt-b: #23180f; }
+.ph.portraitCard[data-field='tech'] { --pt-a: #1c2c4a; --pt-b: #0d1424; }
+.ph.portraitCard[data-field='community'] { --pt-a: #344127; --pt-b: #151b10; }
+.ph.portraitCard[data-field='health'] { --pt-a: #20414a; --pt-b: #0d1b1f; }
+
+.portraitInitials {
+  font-style: italic;
+  font-size: 34cqw;
+  line-height: .9;
+  letter-spacing: -.04em;
+  color: var(--gold-light);
+  text-shadow: 0 6px 30px rgba(0, 0, 0, .35);
+}
+.portraitAr { align-self: flex-end; font-family: var(--sans); font-size: max(11px, 6.5cqw); color: rgba(248, 246, 241, .85); text-align: right; line-height: 1.4; }
+.portraitField { font: 600 max(9px, 4.4cqw) var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(248, 246, 241, .6); }
+.ph.portraitCard[data-size='sm'] { padding: 10%; justify-content: center; align-items: center; }
+.ph.portraitCard[data-size='sm'] .portraitInitials { font-size: 40cqw; }
+.ph.portraitCard[data-size='lg'] .portraitInitials { font-size: 30cqw; }
 
 /* Real photographs: the picture fills the box and takes over the zoom from the stripes. */
 .ph.hasPhoto { background: #e2d8c7; color: transparent; }

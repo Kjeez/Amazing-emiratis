@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import MediaCard from '@/components/media/MediaCard';
 import FollowShare from '@/components/profiles/FollowShare';
 import Placeholder from '@/components/Placeholder';
+import Portrait from '@/components/Portrait';
 import { storyPhoto } from '@/lib/content/photos';
 import { getCategory, type StoryCategory } from '@/lib/content/categories';
 import { getMedia, type MediaItem } from '@/lib/content/media';
@@ -65,7 +66,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
       <section className={s.hero}>
         <div className={s.portrait}>
-          <Placeholder label="profile portrait 4:5" ratio="4/5" className={s.portraitPh} />
+          <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="4/5" size="lg" className={s.portraitPh} />
           {p.winner && <span className={s.badge}>AWARDS 2025 WINNER</span>}
         </div>
         <div className={s.heroText}>
@@ -142,7 +143,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         <div className={s.related}>
           {related.map((r) => (
             <Link key={r.slug} href={`/profiles/${r.slug}`} className={s.relCard}>
-              <span className={`ph ${s.relPh}`} aria-hidden="true" />
+              <Portrait name={r.name} field={r.category} ratio="1/1" size="sm" className={s.relPh} />
               <span className={s.relName}>{r.name}</span>
               <span className={s.relRole}>{r.role}</span>
             </Link>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Amiri, IBM_Plex_Sans_Arabic } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
+import Portrait from '@/components/Portrait';
 import { getCategory } from '@/lib/content/categories';
 import { EMIRATES } from '@/lib/content/emirates';
 import { getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, type Person } from '@/lib/content/people';
@@ -105,7 +106,7 @@ export default function ArabicHome() {
           <div className={styles.spotGrid}>
             {spotlight.map((p) => (
               <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
-                <span role="img" aria-label="صورة شخصية" className={styles.portrait} dir="ltr">PORTRAIT 3:4</span>
+                <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.portrait} />
                 <span className={styles.cardCat}>{catAr(p.category)}</span>
                 <span className={styles.cardName}>{p.nameAr}</span>
                 <span className={styles.cardRole}>{p.roleAr}</span>

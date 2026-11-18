@@ -16,3 +16,5 @@
 
 .filters { display: flex; flex-wrap: wrap; gap: 10px; padding: 40px 0 32px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 48px 32px; }
+
+.hero { background: linear-gradient(90deg, var(--night) 30%, rgba(17, 22, 27, .82)), var(--pattern-star) 0 0 / 64px repeat, var(--night); }
