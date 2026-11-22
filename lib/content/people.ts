@@ -205,13 +205,63 @@ ALL_PEOPLE.push(
     short: 'Sells Emirati craftswomen’s work to buyers around the world.',
     milestones: [['2018', 'Leaves banking to start Sadu Lab'], ['2020', 'Launches with 20 artisans'], ['2023', 'Ships to 30 countries'], ['2026', 'Passes 150 artisans']],
   },
+  {
+    slug: 'humaid-al-falahi', name: 'Humaid Al Falahi', role: 'Founder, Dhow Games', category: 'Tech', emirate: 'abu-dhabi', winner: false, born: 1998,
+    knownFor: 'Game development',
+    quote: 'Our grandparents told stories around the fire. We tell them with a controller.',
+    bio: 'Humaid Al Falahi founded Dhow Games, a studio making mobile games set in the history and landscapes of the Gulf.',
+    bio2: 'Its first title, a pearl-diving adventure, has been downloaded more than two million times, and the studio now employs 25 developers and artists.',
+    short: 'Makes games set in the Gulf’s history and landscapes.',
+    milestones: [['2020', 'Graduates in computer science'], ['2021', 'Founds Dhow Games'], ['2023', 'First game passes one million downloads'], ['2026', 'Opens second studio']],
+  },
+  {
+    slug: 'sultan-al-ketbi', name: 'Sultan Al Ketbi', role: 'Founder, Wadi Ride', category: 'Business', emirate: 'ras-al-khaimah', winner: false, born: 1997,
+    knownFor: 'Electric bike sharing',
+    quote: 'The mountains were always our playground. Now you can ride them without the noise.',
+    bio: 'Sultan Al Ketbi runs Wadi Ride, an electric-bike sharing service for the mountain trails and towns of Ras Al Khaimah and Fujairah.',
+    bio2: 'The company operates more than 600 bikes and works with hotels and tour operators to open new trail routes.',
+    short: 'Runs an electric-bike network across the northern mountains.',
+    milestones: [['2019', 'Completes engineering degree'], ['2022', 'Launches Wadi Ride with 40 bikes'], ['2024', 'Expands to Fujairah'], ['2026', 'Passes 600 bikes']],
+  },
+  {
+    slug: 'khalifa-al-blooshi', name: 'Khalifa Al Blooshi', role: 'Co-founder, Mahsool', category: 'Business', emirate: 'fujairah', winner: false, born: 1999,
+    knownFor: 'Farm-to-table marketplace',
+    quote: 'Every farm in the east coast has a story. We just help people find it.',
+    bio: 'Khalifa Al Blooshi co-founded Mahsool, an online marketplace that sells dates, honey and vegetables directly from family farms.',
+    bio2: 'More than 300 farms sell through the platform, which handles packing and same-day delivery across the Emirates.',
+    short: 'Sells produce from family farms straight to homes.',
+    milestones: [['2021', 'Graduates in business'], ['2022', 'Co-founds Mahsool'], ['2024', 'Passes 100 farms'], ['2026', 'Passes 300 farms']],
+  },
 );
 
 /** Profiles currently shown: everyone outside hidden sections. */
 export const PEOPLE: Person[] = ALL_PEOPLE.filter((p) => !isHiddenCategory(p.category.toLowerCase()));
 
-/** Homepage collection: young women entrepreneurs in the archive (slugs, in display order). */
-export const YOUNG_WOMEN_ENTREPRENEURS = ['alia-al-shamsi', 'reem-al-shehhi', 'mahra-al-ameri', 'latifa-al-mazrouei', 'noor-al-hammadi', 'hessa-al-nuaimi'];
+export type Collection = { slug: string; title: string; titleEm: string; intro: string; cta: string; people: string[] };
+
+/** Curated collections of profiles, each with its own page (/<slug>) and homepage section. */
+export const COLLECTIONS: Record<'women' | 'young', Collection> = {
+  women: {
+    slug: 'women-entrepreneurs',
+    title: 'Women',
+    titleEm: 'Entrepreneurs',
+    intro: 'Emirati women building companies, from venture capital and payments to heritage fashion, coffee and craft.',
+    cta: 'Know a founder who belongs here? Tell us about her. The editors review every application.',
+    people: ['aisha-al-marri', 'alia-al-shamsi', 'reem-al-shehhi', 'hessa-al-nuaimi', 'noor-al-hammadi', 'mahra-al-ameri'],
+  },
+  young: {
+    slug: 'young-entrepreneurs',
+    title: 'Young',
+    titleEm: 'Entrepreneurs',
+    intro: 'Founders who started their companies in their twenties, from games and electric bikes to reforestation and farm-to-table food.',
+    cta: 'Know a young founder who belongs here? Put them forward. The editors review every application.',
+    people: ['humaid-al-falahi', 'latifa-al-mazrouei', 'sultan-al-ketbi', 'khalifa-al-blooshi', 'mahra-al-ameri', 'noor-al-hammadi'],
+  },
+};
+
+export function collectionPeople(c: Collection): Person[] {
+  return c.people.map((s) => bySlug.get(s)).filter((p): p is Person => Boolean(p));
+}
 
 export const SPOTLIGHT_LEAD = 'mariam-al-falasi';
 export const SPOTLIGHT = ['khalid-al-mansoori', 'saeed-al-shamsi', 'omar-al-zaabi', 'aisha-al-marri'];

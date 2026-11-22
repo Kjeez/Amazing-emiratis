@@ -8,10 +8,11 @@ import styles from './HeroCarousel.module.css';
 
 export type HeroSlide = {
   href: string;
-  eyebrow: string;
+  /** Optional label above the headline (the homepage leaves it out). */
+  eyebrow?: string;
   title: string;
   dek?: string;
-  byline: string;
+  byline?: string;
   photo?: Photo;
   /** Extra calls to action, e.g. "Read the profile", "Watch the video". */
   links?: { label: string; href: string; kind?: 'video' }[];
@@ -102,7 +103,7 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         aria-label={`${active + 1} of ${count}`}
         aria-live={running ? 'off' : 'polite'}
       >
-        <span className={styles.eyebrow}>{s.eyebrow}</span>
+        {s.eyebrow && <span className={styles.eyebrow}>{s.eyebrow}</span>}
         <h1 className={styles.title}>
           <Link href={s.href} aria-label={s.title}>
             {s.title.split(' ').map((w, i) => (
@@ -115,7 +116,7 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         </h1>
         <div className={styles.foot}>
           {s.dek && <p className={styles.dek}>{s.dek}</p>}
-          <span className={styles.byline}>{s.byline}</span>
+          {s.byline && <span className={styles.byline}>{s.byline}</span>}
         </div>
         {s.links && s.links.length > 0 && (
           <div className={styles.links}>

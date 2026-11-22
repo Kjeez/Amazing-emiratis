@@ -1,25 +1,21 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import Countdown from '@/components/Countdown';
 import EmiratesSwitcher, { type SwitcherEmirate } from '@/components/home/EmiratesSwitcher';
 import HeroCarousel, { type HeroSlide } from '@/components/home/HeroCarousel';
 import IssueCover from '@/components/home/IssueCover';
-import JoinArchiveForm from '@/components/home/JoinArchiveForm';
 import MediaCard from '@/components/media/MediaCard';
 import VideoEmbed from '@/components/media/VideoEmbed';
-import SectionTabs, { type SectionTab } from '@/components/home/SectionTabs';
+import Placeholder from '@/components/Placeholder';
 import Portrait from '@/components/Portrait';
-import { authorName } from '@/lib/content/authors';
-import { STORY_CATEGORY_LABEL, type StoryCategory } from '@/lib/content/categories';
-import { EMIRATES } from '@/lib/content/emirates';
 import { AMAZING_100, amazing100 } from '@/lib/content/amazing-100';
+import { EMIRATES } from '@/lib/content/emirates';
 import { MASTER_STORIES } from '@/lib/content/master';
 import { MEDIA } from '@/lib/content/media';
+import { collectionPeople, COLLECTIONS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, ARCHIVE_TOTALS, type Collection, type Person } from '@/lib/content/people';
 import { emiratePhoto, photo, storyPhoto } from '@/lib/content/photos';
 import { getPressRelease, PRESS_RELEASES } from '@/lib/content/press';
-import { ARCHIVE_TOTALS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, YOUNG_WOMEN_ENTREPRENEURS, type Person } from '@/lib/content/people';
-import { COVER_STORY_SLUG, getStory, MOST_READ, shortDate, storiesByDate, storiesInCategory, type Story } from '@/lib/content/stories';
+import { getStory, shortDate, storiesByDate, type Story } from '@/lib/content/stories';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -28,35 +24,19 @@ export const metadata: Metadata = {
 
 const href = (s: Story) => `/stories/${s.slug}`;
 
-function storySlide(st: Story): HeroSlide {
-  return {
-    href: href(st),
-    eyebrow: st.cover ? `COVER STORY — ${st.sub.toUpperCase()}` : `${STORY_CATEGORY_LABEL[st.category].toUpperCase()} — ${st.sub.toUpperCase()}`,
-    title: st.title,
-    dek: st.dek,
-    byline: `By ${authorName(st.author)} · ${st.readMins} min read`,
-    photo: storyPhoto(st.slug),
-  };
-}
-
-/** Slides for the Master Stories hero, from lib/content/master.ts. */
+/**
+ * Slides for the Master Stories hero, from lib/content/master.ts. Headline, summary and photo
+ * only: no date, category, byline or read time.
+ */
 function masterSlides(): HeroSlide[] {
   return MASTER_STORIES.flatMap((m): HeroSlide[] => {
     if (m.kind === 'story') {
       const st = getStory(m.story);
-      return st ? [storySlide(st)] : [];
+      return st ? [{ href: href(st), title: st.title, dek: st.dek, photo: storyPhoto(st.slug) }] : [];
     }
     if (m.kind === 'news') {
       const pr = getPressRelease(m.press);
-      if (!pr) return [];
-      return [{
-        href: `/press/${pr.slug}`,
-        eyebrow: `NEWS — ${shortDate(pr.date).toUpperCase()}`,
-        title: pr.title,
-        dek: pr.summary,
-        byline: 'Press release',
-        photo: m.photo ? photo(m.photo) : undefined,
-      }];
+      return pr ? [{ href: `/press/${pr.slug}`, title: pr.title, dek: pr.summary, photo: m.photo ? photo(m.photo) : undefined }] : [];
     }
     const person = getPerson(m.person);
     if (!person) return [];
@@ -66,131 +46,136 @@ function masterSlides(): HeroSlide[] {
     if (video) links.push({ label: 'Watch the video', href: `/watch/${video.slug}`, kind: 'video' });
     return [{
       href: st ? href(st) : `/profiles/${person.slug}`,
-      eyebrow: `MASTER STORY — PROFILE · ${person.category.toUpperCase()}`,
       title: st?.title ?? person.name,
       dek: person.short,
-      byline: st ? `${st.readMins} min read` : person.role,
       photo: st ? storyPhoto(st.slug) : undefined,
       links,
     }];
   });
 }
 
-const TABS: { label: string; category: StoryCategory; img: string }[] = [
-  { label: 'Business', category: 'business', img: 'business feature 4:3' },
-  { label: 'Culture', category: 'culture', img: 'culture feature 4:3' },
-  { label: 'Technology', category: 'tech', img: 'tech feature 4:3' },
-];
-
-function buildTabs(): SectionTab[] {
-  return TABS.flatMap((t) => {
-    const all = storiesInCategory(t.category);
-    const lead = all.find((s) => s.dek) ?? all[0];
-    if (!lead) return [];
-    return [{
-      label: t.label,
-      img: t.img,
-      lead: { href: href(lead), cat: lead.sub.toUpperCase(), title: lead.title, dek: lead.dek ?? '', photo: storyPhoto(lead.slug) },
-      items: all.filter((s) => s !== lead).slice(0, 3).map((s) => ({ href: href(s), cat: s.sub.toUpperCase(), title: s.title })),
-    }];
-  });
+/** Homepage section for one curated collection of profiles. */
+function CollectionSection({ collection, id }: { collection: Collection; id: string }) {
+  const people = collectionPeople(collection);
+  if (!people.length) return null;
+  return (
+    <section className={styles.section} aria-labelledby={id}>
+      <div className={styles.sectionHead}>
+        <h2 id={id} className={styles.h2}>{collection.title} <em className={styles.em}>{collection.titleEm}</em></h2>
+        <Link href={`/${collection.slug}`} className="underlineLink">See the collection</Link>
+      </div>
+      <div className={styles.collection}>
+        {people.map((p) => (
+          <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
+            <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
+            <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
+            <span className={styles.cardName}>{p.name}</span>
+            <span className={styles.cardRole}>{p.role}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export default function HomePage() {
-  const latest = storiesByDate().filter((s) => s.slug !== COVER_STORY_SLUG).slice(0, 4);
+  const heroSlides = masterSlides();
   const lead = getPerson(SPOTLIGHT_LEAD);
   const spotlight = SPOTLIGHT.map(getPerson).filter((p): p is Person => Boolean(p));
-  const mostRead = MOST_READ.map(getStory).filter((s): s is Story => Boolean(s));
-  const emirates: SwitcherEmirate[] = EMIRATES.map((e) => ({ slug: e.slug, name: e.name, ar: e.ar, landmark: e.landmark, short: e.short, count: e.count, photo: emiratePhoto(e.slug) }));
-  const heroSlides = masterSlides();
-  const press = PRESS_RELEASES.slice(0, 3);
-  const women = YOUNG_WOMEN_ENTREPRENEURS.map(getPerson).filter((p): p is Person => Boolean(p));
+  const news = storiesByDate().slice(0, 6);
+  const press = PRESS_RELEASES.slice(0, 4);
   const list = amazing100();
+  const emirates: SwitcherEmirate[] = EMIRATES.map((e) => ({ slug: e.slug, name: e.name, ar: e.ar, landmark: e.landmark, short: e.short, count: e.count, photo: emiratePhoto(e.slug) }));
   const featuredVideo = MEDIA.find((m) => m.kind === 'video' && m.youtubeId);
   const moreMedia = MEDIA.filter((m) => m !== featuredVideo).slice(0, 3);
-  const dunes = photo('page/home-dunes');
 
   return (
     <>
+      {/* 1. Master Story */}
       <HeroCarousel slides={heroSlides} />
 
-      <section className={styles.press} aria-labelledby="press-title">
-        <div className={styles.pressInner}>
-          <h2 id="press-title" className={styles.pressLabel}>
-            <span className={styles.pressDot} aria-hidden="true" />PRESS RELEASES
-          </h2>
-          <ul className={styles.pressList}>
-            {press.map((p) => (
-              <li key={p.slug}>
-                <Link href={`/press/${p.slug}`} className={styles.pressItem}>
-                  <time dateTime={p.date} className={styles.pressDate}>{shortDate(p.date)}</time>
-                  <span className={styles.pressTitle}>{p.title}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link href="/press" className={styles.pressAll}>All releases →</Link>
-        </div>
-      </section>
-
       <main className={styles.main}>
-        <section className={styles.latest} aria-label="Latest stories">
-          {latest.map((s) => (
-            <Link key={s.slug} href={href(s)} className={styles.latestItem}>
-              <span className={styles.latestCat}>{STORY_CATEGORY_LABEL[s.category].toUpperCase()}</span>
-              <span className={styles.latestTitle}>{s.title}</span>
-            </Link>
-          ))}
-        </section>
+        {/* 2–3. In the Spotlight and Women Entrepreneurs, with News alongside */}
+        <div className={styles.withRail}>
+          <div className={styles.railMain}>
+            <section className={styles.section} aria-labelledby="spotlight-title">
+              <div className={styles.sectionHead}>
+                <h2 id="spotlight-title" className={styles.h2}>In the <em className={styles.em}>Spotlight</em></h2>
+                <Link href="/profiles" className="underlineLink">All {ARCHIVE_TOTALS.profiles} profiles</Link>
+              </div>
+              <div className={styles.spotlight}>
+                {lead && (
+                  <Link href={`/profiles/${lead.slug}`} className={styles.lead}>
+                    <Portrait name={lead.name} nameAr={lead.nameAr} field={lead.category} ratio="4/5" size="lg" className={styles.leadPh} />
+                    <span className="eyebrow">{lead.category.toUpperCase()}</span>
+                    <span className={styles.leadName}>{lead.name}</span>
+                    <span className={styles.leadBio}>{lead.short}</span>
+                  </Link>
+                )}
+                <div className={styles.spotGrid}>
+                  {spotlight.map((p) => (
+                    <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
+                      <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
+                      <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
+                      <span className={styles.cardName}>{p.name}</span>
+                      <span className={styles.cardRole}>{p.role}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
 
-        <IssueCover />
-
-        <section className={styles.section} aria-labelledby="spotlight-title">
-          <div className={styles.sectionHead}>
-            <h2 id="spotlight-title" className={styles.h2}>In the <em className={styles.em}>Spotlight</em></h2>
-            <Link href="/profiles" className="underlineLink">All {ARCHIVE_TOTALS.profiles} profiles</Link>
+            <CollectionSection collection={COLLECTIONS.women} id="women-title" />
           </div>
-          <div className={styles.spotlight}>
-            {lead && (
-              <Link href={`/profiles/${lead.slug}`} className={styles.lead}>
-                <Portrait name={lead.name} nameAr={lead.nameAr} field={lead.category} ratio="4/5" size="lg" className={styles.leadPh} />
-                <span className="eyebrow">{lead.category.toUpperCase()}</span>
-                <span className={styles.leadName}>{lead.name}</span>
-                <span className={styles.leadBio}>{lead.short}</span>
-              </Link>
-            )}
-            <div className={styles.spotGrid}>
-              {spotlight.map((p) => (
-                <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
-                  <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
-                  <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
-                  <span className={styles.cardName}>{p.name}</span>
-                  <span className={styles.cardRole}>{p.role}</span>
-                </Link>
-              ))}
+
+          <aside className={styles.rail} aria-labelledby="news-title">
+            <div className={styles.railHead}>
+              <h2 id="news-title" className={styles.railTitle}><span className={styles.railDot} aria-hidden="true" />News</h2>
+              <Link href="/search" className={styles.railAll}>All stories →</Link>
             </div>
+            <ul className={styles.railList}>
+              {news.map((s) => (
+                <li key={s.slug}>
+                  <Link href={href(s)} className={styles.newsItem}>
+                    <Placeholder label="" ratio="1/1" photo={storyPhoto(s.slug)} sizes="72px" className={styles.newsThumb} />
+                    <span className={styles.newsText}>
+                      <time dateTime={s.date} className={styles.railDate}>{shortDate(s.date)}</time>
+                      <span className={styles.railItemTitle}>{s.title}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+
+        {/* 4–5. Young Entrepreneurs and In this issue, with Press Releases alongside */}
+        <div className={styles.withRail}>
+          <div className={styles.railMain}>
+            <CollectionSection collection={COLLECTIONS.young} id="young-title" />
+            <IssueCover />
           </div>
-        </section>
 
-        {women.length > 0 && (
-          <section className={styles.section} aria-labelledby="women-title">
-            <div className={styles.sectionHead}>
-              <h2 id="women-title" className={styles.h2}>Young Women <em className={styles.em}>Entrepreneurs</em></h2>
-              <Link href="/young-women-entrepreneurs" className="underlineLink">See the collection</Link>
+          <aside className={styles.rail} aria-labelledby="press-title">
+            <div className={styles.railHead}>
+              <h2 id="press-title" className={styles.railTitle}><span className={styles.railDot} aria-hidden="true" />Press releases</h2>
+              <Link href="/press" className={styles.railAll}>All releases →</Link>
             </div>
-            <div className={styles.women}>
-              {women.map((p) => (
-                <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
-                  <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
-                  <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
-                  <span className={styles.cardName}>{p.name}</span>
-                  <span className={styles.cardRole}>{p.role}</span>
-                </Link>
+            <ul className={styles.railList}>
+              {press.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/press/${p.slug}`} className={styles.pressItem}>
+                    <time dateTime={p.date} className={styles.railDate}>{shortDate(p.date)}</time>
+                    <span className={styles.railItemTitle}>{p.title}</span>
+                    <span className={styles.pressSummary}>{p.summary}</span>
+                  </Link>
+                </li>
               ))}
-            </div>
-          </section>
-        )}
+            </ul>
+          </aside>
+        </div>
 
+        {/* 6. The Amazing 100 */}
         <section className={styles.list100} aria-labelledby="list100-title">
           <div className={styles.list100Head}>
             <span className="eyebrow">THE LIST · {AMAZING_100.year}</span>
@@ -213,33 +198,16 @@ export default function HomePage() {
           </ol>
         </section>
 
+        {/* 7. Emirates */}
         <section className={styles.section} aria-labelledby="emirates-title">
           <h2 id="emirates-title" className={`${styles.h2} ${styles.h2Block}`}>Seven <em className={styles.em}>Emirates</em></h2>
           <EmiratesSwitcher emirates={emirates} />
         </section>
 
-        <section className={`${styles.section} ${styles.sections}`}>
-          <div className={styles.tabsCol}>
-            <SectionTabs tabs={buildTabs()} />
-          </div>
-          <aside className={styles.mostRead} aria-labelledby="most-read-title">
-            <h3 id="most-read-title" className={styles.mostReadTitle}>MOST READ</h3>
-            <ol className={styles.mostReadList}>
-              {mostRead.map((s, i) => (
-                <li key={s.slug}>
-                  <Link href={href(s)} className={styles.mostReadItem}>
-                    <span className={styles.mostReadN}>{i + 1}</span>
-                    <span className={styles.mostReadText}>{s.title}</span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
-          </aside>
-        </section>
-
+        {/* 8. Videos */}
         <section className={styles.watch} aria-labelledby="watch-title">
           <div className={styles.watchHead}>
-            <h2 id="watch-title" className={styles.watchTitle}>Watch <em>&amp;</em> Listen</h2>
+            <h2 id="watch-title" className={styles.watchTitle}>Videos <em>&amp;</em> Podcasts</h2>
             <Link href="/watch" className={styles.watchAll}>All videos and podcasts →</Link>
           </div>
           <div className={styles.watchBody}>
@@ -256,9 +224,10 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* 9. Awards & nomination */}
         <section className={styles.awards} aria-labelledby="awards-title">
           <div className={styles.awardsMain}>
-            <span className={styles.awardsEyebrow}>NOMINATIONS OPEN</span>
+            <span className={styles.awardsEyebrow}>AWARDS &amp; NOMINATIONS</span>
             <h2 id="awards-title" className={styles.awardsTitle}>Awards <em className={styles.awardsEm}>2026</em></h2>
             <p className={styles.awardsText}>Fourteen categories. All seven Emirates. Tell us who is shaping the nation.</p>
             <Link href="/nominate" className={styles.awardsBtn}>Submit a nomination</Link>
@@ -269,19 +238,6 @@ export default function HomePage() {
           </div>
         </section>
       </main>
-
-      <section className={styles.quote} aria-labelledby="join-title">
-        {dunes && <Image src={dunes.src} alt="" fill sizes="100vw" className={styles.quoteImg} />}
-        <span className={styles.quoteShade} aria-hidden="true" />
-        <div className={styles.quoteInner}>
-          <blockquote className={styles.blockquote}>“A tribute to the visionaries who continually build our future.”</blockquote>
-          <div className={styles.joinCard}>
-            <h2 id="join-title" className={styles.joinTitle}>Join the <em className={styles.em}>Archive</em></h2>
-            <p className={styles.joinText}>Share your story, or the story of someone who deserves to be remembered. Our editors review every application.</p>
-            <JoinArchiveForm />
-          </div>
-        </div>
-      </section>
     </>
   );
 }

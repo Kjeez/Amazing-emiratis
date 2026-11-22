@@ -32,13 +32,13 @@ export const PRESS_RELEASES: PressRelease[] = [
     ],
   },
   {
-    slug: 'young-women-entrepreneurs-collection',
+    slug: 'entrepreneurs-collections',
     date: '2026-11-03',
-    title: 'New collection celebrates young women entrepreneurs',
-    summary: 'The archive opens a dedicated collection of profiles of young Emirati women building companies.',
+    title: 'New collections celebrate women and young entrepreneurs',
+    summary: 'The archive opens two collections: Women Entrepreneurs and Young Entrepreneurs.',
     body: [
-      'Amazing Emiratis has opened a new collection in its archive dedicated to young women entrepreneurs, from fashion and specialty coffee to payments and reforestation technology.',
-      'Readers can nominate founders for the collection through the Join the Archive form. Every nomination is reviewed by the editors.',
+      'Amazing Emiratis has opened two new collections in its archive: Women Entrepreneurs, celebrating Emirati women building companies, and Young Entrepreneurs, for founders who started their companies in their twenties.',
+      'Readers can nominate founders for the collections through the Join the Archive form. Every nomination is reviewed by the editors.',
     ],
   },
   {
