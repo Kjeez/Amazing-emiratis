@@ -27,9 +27,15 @@ const ALL_STORIES: Story[] = [
   { slug: 'from-souk-stall-to-series-b', title: 'From Souk Stall to Series B: A Spice Brand’s Long Road', category: 'business', sub: 'Entrepreneurship', date: '2026-10-02', readMins: 6, author: 'hamad-al-suwaidi', emirate: 'dubai' },
   { slug: 'engineers-behind-the-largest-solar-park', title: 'The Engineers Behind the Region’s Largest Solar Park', category: 'business', sub: 'Energy', date: '2026-09-29', readMins: 8, author: 'hamad-al-suwaidi', emirate: 'abu-dhabi' },
   { slug: 'five-women-reshaping-boardrooms', title: 'Five Women Reshaping Boardrooms Across the Emirates', category: 'business', sub: 'Leadership', date: '2026-06-11', readMins: 9, author: 'hamad-al-suwaidi' },
-  { slug: 'ras-al-khaimah-new-class-of-developer', title: 'Why Ras Al Khaimah Is Drawing a New Class of Developer', category: 'business', sub: 'Real Estate', date: '2026-09-27', readMins: 5, author: 'hamad-al-suwaidi', emirate: 'ras-al-khaimah' },
+  { slug: 'ras-al-khaimah-new-class-of-developer', title: 'Why Ras Al Khaimah Is Drawing a New Class of Developer', category: 'real-estate', sub: 'Development', date: '2026-09-27', readMins: 5, author: 'hamad-al-suwaidi', emirate: 'ras-al-khaimah' },
   { slug: 'first-islamic-venture-fund', title: 'Inside the Region’s First Islamic Venture Fund', category: 'business', sub: 'Finance', date: '2026-09-21', readMins: 7, author: 'hamad-al-suwaidi' },
   { slug: 'perfume-house-built-on-oud-and-patience', title: 'A Perfume House Built on Oud and Patience', category: 'business', sub: 'Entrepreneurship', date: '2026-09-15', readMins: 4, author: 'hamad-al-suwaidi', emirate: 'ajman' },
+
+  // Real Estate (sample)
+  { slug: 'developers-rebuilding-old-neighbourhoods', title: 'The Second-Generation Developers Rebuilding Old Neighbourhoods', category: 'real-estate', sub: 'Development', date: '2026-11-12', readMins: 8, author: 'hamad-al-suwaidi', dek: 'Family firms are restoring coral-stone quarters instead of clearing them, and finding buyers who want to live in them.', emirate: 'umm-al-quwain' },
+  { slug: 'homes-for-young-emiratis', title: 'Inside the Push for Homes Young Emiratis Can Afford', category: 'real-estate', sub: 'Housing', date: '2026-11-05', readMins: 7, author: 'hamad-al-suwaidi', emirate: 'abu-dhabi' },
+  { slug: 'investors-look-to-sharjah', title: 'Why Patient Investors Are Looking to Sharjah', category: 'real-estate', sub: 'Investment', date: '2026-10-22', readMins: 6, author: 'hamad-al-suwaidi', emirate: 'sharjah' },
+  { slug: 'architects-rethinking-the-villa', title: 'Building for the Heat: The Architects Rethinking the Villa', category: 'real-estate', sub: 'Design', date: '2026-10-09', readMins: 9, author: 'layla-al-hashimi', emirate: 'ajman' },
 
   // Culture
   { slug: 'calligrapher-restoring-sharjah-manuscripts', title: 'The Calligrapher Restoring Sharjah’s Forgotten Manuscripts', category: 'culture', sub: 'Heritage', date: '2026-10-16', readMins: 9, author: 'layla-al-hashimi', dek: 'A decade-long effort to rescue handwritten texts from private collections across the Gulf.', emirate: 'sharjah' },

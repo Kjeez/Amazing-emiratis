@@ -25,12 +25,12 @@ const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
 const arDigits = (v: string | number) => String(v).replace(/\d/g, (d) => AR_DIGITS[Number(d)]);
 
 const NAV: { label: string; href: string }[] = [
-  { label: 'أعمال', href: '/category/business' },
-  { label: 'ثقافة', href: '/category/culture' },
   { label: 'أسلوب حياة', href: '/category/lifestyle' },
+  { label: 'أعمال', href: '/category/business' },
   { label: 'تقنية', href: '/category/tech' },
-  { label: 'فعاليات', href: '/events' },
-  { label: 'جوائز', href: '/awards' },
+  { label: 'عقارات', href: '/category/real-estate' },
+  { label: 'فيديو', href: '/watch' },
+  { label: 'قائمة المئة', href: '/amazing-100' },
 ];
 
 // Arabic headlines for the latest strip (copy from the design); the stories themselves come from lib/content.

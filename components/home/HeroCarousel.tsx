@@ -11,6 +11,8 @@ export type HeroSlide = {
   /** Optional label above the headline (the homepage leaves it out). */
   eyebrow?: string;
   title: string;
+  /** Optional second line under the headline. */
+  subhead?: string;
   dek?: string;
   byline?: string;
   photo?: Photo;
@@ -114,6 +116,7 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
             ))}
           </Link>
         </h1>
+        {s.subhead && <p className={styles.subhead}>{s.subhead}</p>}
         <div className={styles.foot}>
           {s.dek && <p className={styles.dek}>{s.dek}</p>}
           {s.byline && <span className={styles.byline}>{s.byline}</span>}
@@ -132,6 +135,28 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
         )}
       </div>
 
+      {count > 1 && (
+        <div className={styles.scroller}>
+          <button type="button" className={styles.arrow} onClick={() => go(active - 1)} aria-label="Previous story">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+          <div className={styles.dots} role="group" aria-label="Choose a story">
+            {slides.map((slide, i) => (
+              <button
+                key={slide.href}
+                type="button"
+                className={styles.dot}
+                aria-current={i === active ? 'true' : undefined}
+                aria-label={`Story ${i + 1} of ${count}: ${slide.title}`}
+                onClick={() => go(i)}
+              />
+            ))}
+          </div>
+          <button type="button" className={styles.arrow} onClick={() => go(active + 1)} aria-label="Next story">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

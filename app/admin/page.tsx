@@ -5,6 +5,7 @@ import { adminConfigured, isAdmin } from '@/lib/auth';
 import { logout } from './actions';
 import LoginForm from './LoginForm';
 import styles from './admin.module.css';
+import Logo from '@/components/Logo';
 
 export const metadata: Metadata = { title: 'Admin', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
@@ -92,7 +93,7 @@ function Shell({ children, signedIn }: { children: React.ReactNode; signedIn?: b
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <Link href="/" className={styles.logo}>Amazing <em>Emiratis</em></Link>
+        <Link href="/" className={styles.logo}><Logo /></Link>
         <span className={styles.badge}>Admin</span>
         {signedIn && (
           <form action={logout} className={styles.logout}>

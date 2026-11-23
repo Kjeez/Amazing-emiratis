@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ARCHIVE_LINKS, NAV, SOCIALS } from '@/lib/content/site';
 import type { MegaPanel } from '@/lib/mega-menu';
+import SocialIcon from './SocialIcon';
+import Logo from './Logo';
 import styles from './SiteHeader.module.css';
 
 function hijriToday() {
@@ -89,7 +91,7 @@ export default function SiteHeader({ mega = {} }: { mega?: Record<string, MegaPa
         <div className={styles.scrim} onClick={() => setOpen(false)} />
         <aside className={styles.menu} aria-label="Site menu" inert={!open}>
           <div className={styles.menuTop}>
-            <span className={styles.menuLogo}>Amazing <em>Emiratis</em></span>
+            <span className={styles.menuLogo}><Logo onDark /></span>
             <button className={styles.close} onClick={() => setOpen(false)} aria-label="Close menu">✕</button>
           </div>
           <nav className={styles.menuNav}>
@@ -130,7 +132,7 @@ export default function SiteHeader({ mega = {} }: { mega?: Record<string, MegaPa
             <button className={styles.burger} onClick={() => setOpen(true)} aria-label="Open menu" aria-expanded={open}>
               <span /><span /><span />
             </button>
-            <Link href="/" className={styles.logo}>Amazing <em>Emiratis</em></Link>
+            <Link href="/" className={styles.logo} aria-label="Amazing Emiratis, home"><Logo /></Link>
           </div>
           <nav className={styles.nav} aria-label="Sections">
             {NAV.map((n) => {
@@ -166,6 +168,13 @@ export default function SiteHeader({ mega = {} }: { mega?: Record<string, MegaPa
                 </span>
               );
             })}
+            <span className={styles.socialBar}>
+              {SOCIALS.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={styles.socialIcon} aria-label={s.label}>
+                  <SocialIcon icon={s.icon} />
+                </a>
+              ))}
+            </span>
           </nav>
           <div className={styles.tools}>
             {isHome && (

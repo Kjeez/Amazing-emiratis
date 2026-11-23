@@ -12,7 +12,7 @@ import { AMAZING_100, amazing100 } from '@/lib/content/amazing-100';
 import { EMIRATES } from '@/lib/content/emirates';
 import { MASTER_STORIES } from '@/lib/content/master';
 import { MEDIA } from '@/lib/content/media';
-import { collectionPeople, COLLECTIONS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, ARCHIVE_TOTALS, type Collection, type Person } from '@/lib/content/people';
+import { collectionPeople, COLLECTIONS, getPerson, SPOTLIGHT, SPOTLIGHT_LEAD, type Collection, type Person } from '@/lib/content/people';
 import { emiratePhoto, photo, storyPhoto } from '@/lib/content/photos';
 import { getPressRelease, PRESS_RELEASES } from '@/lib/content/press';
 import { getStory, shortDate, storiesByDate, type Story } from '@/lib/content/stories';
@@ -30,13 +30,14 @@ const href = (s: Story) => `/stories/${s.slug}`;
  */
 function masterSlides(): HeroSlide[] {
   return MASTER_STORIES.flatMap((m): HeroSlide[] => {
+    const text = { subhead: m.subheadline };
     if (m.kind === 'story') {
       const st = getStory(m.story);
-      return st ? [{ href: href(st), title: st.title, dek: st.dek, photo: storyPhoto(st.slug) }] : [];
+      return st ? [{ ...text, href: href(st), title: m.headline ?? st.title, dek: m.summary ?? st.dek, photo: storyPhoto(st.slug) }] : [];
     }
     if (m.kind === 'news') {
       const pr = getPressRelease(m.press);
-      return pr ? [{ href: `/press/${pr.slug}`, title: pr.title, dek: pr.summary, photo: m.photo ? photo(m.photo) : undefined }] : [];
+      return pr ? [{ ...text, href: `/press/${pr.slug}`, title: m.headline ?? pr.title, dek: m.summary ?? pr.summary, photo: m.photo ? photo(m.photo) : undefined }] : [];
     }
     const person = getPerson(m.person);
     if (!person) return [];
@@ -45,9 +46,10 @@ function masterSlides(): HeroSlide[] {
     const links: NonNullable<HeroSlide['links']> = [{ label: 'Read the profile', href: `/profiles/${person.slug}` }];
     if (video) links.push({ label: 'Watch the video', href: `/watch/${video.slug}`, kind: 'video' });
     return [{
+      ...text,
       href: st ? href(st) : `/profiles/${person.slug}`,
-      title: st?.title ?? person.name,
-      dek: person.short,
+      title: m.headline ?? st?.title ?? person.name,
+      dek: m.summary ?? person.short,
       photo: st ? storyPhoto(st.slug) : undefined,
       links,
     }];
@@ -62,7 +64,7 @@ function CollectionSection({ collection, id }: { collection: Collection; id: str
     <section className={styles.section} aria-labelledby={id}>
       <div className={styles.sectionHead}>
         <h2 id={id} className={styles.h2}>{collection.title} <em className={styles.em}>{collection.titleEm}</em></h2>
-        <Link href={`/${collection.slug}`} className="underlineLink">See the collection</Link>
+        <Link href={`/${collection.slug}`} className="underlineLink">See more…</Link>
       </div>
       <div className={styles.collection}>
         {people.map((p) => (
@@ -101,7 +103,7 @@ export default function HomePage() {
             <section className={styles.section} aria-labelledby="spotlight-title">
               <div className={styles.sectionHead}>
                 <h2 id="spotlight-title" className={styles.h2}>In the <em className={styles.em}>Spotlight</em></h2>
-                <Link href="/profiles" className="underlineLink">All {ARCHIVE_TOTALS.profiles} profiles</Link>
+                <Link href="/profiles" className="underlineLink">See more…</Link>
               </div>
               <div className={styles.spotlight}>
                 {lead && (

@@ -1,18 +1,20 @@
 export type NavLink = { label: string; href: string };
 
+/** The category bar, in order. Culture, Events and Awards live in the side menu and footer. */
 export const NAV: NavLink[] = [
-  { label: 'Business', href: '/category/business' },
-  { label: 'Culture', href: '/category/culture' },
   { label: 'Lifestyle', href: '/category/lifestyle' },
-  { label: 'Tech', href: '/category/tech' },
-  { label: 'Watch', href: '/watch' },
-  { label: 'Events', href: '/events' },
-  { label: 'Awards', href: '/awards' },
+  { label: 'Business', href: '/category/business' },
+  { label: 'Technology', href: '/category/tech' },
+  { label: 'Real Estate', href: '/category/real-estate' },
+  { label: 'Videos', href: '/watch' },
+  { label: 'Amazing 100', href: '/amazing-100' },
 ];
 
 export const ARCHIVE_LINKS: NavLink[] = [
+  { label: 'Culture', href: '/category/culture' },
+  { label: 'Events', href: '/events' },
+  { label: 'Awards 2026', href: '/awards' },
   { label: 'Profiles A–Z', href: '/profiles' },
-  { label: 'The Amazing 100', href: '/amazing-100' },
   { label: 'Women Entrepreneurs', href: '/women-entrepreneurs' },
   { label: 'Young Entrepreneurs', href: '/young-entrepreneurs' },
   { label: 'Watch & Listen', href: '/watch' },
@@ -24,10 +26,13 @@ export const ARCHIVE_LINKS: NavLink[] = [
   { label: 'عربي', href: '/ar' },
 ];
 
-export const SOCIALS: NavLink[] = [
-  { label: 'Instagram', href: 'https://www.instagram.com/' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-  { label: 'YouTube', href: 'https://www.youtube.com/' },
+/** Social accounts. Replace each href with the platform's real account URL. */
+export const SOCIALS: (NavLink & { icon: 'instagram' | 'x' | 'linkedin' | 'youtube' | 'facebook' })[] = [
+  { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'instagram' },
+  { label: 'X', href: 'https://x.com/', icon: 'x' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'linkedin' },
+  { label: 'YouTube', href: 'https://www.youtube.com/', icon: 'youtube' },
+  { label: 'Facebook', href: 'https://www.facebook.com/', icon: 'facebook' },
 ];
 
 export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
@@ -46,6 +51,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     title: 'EXPLORE',
     links: [
       { label: 'Profiles', href: '/profiles' },
+      { label: 'Culture', href: '/category/culture' },
       { label: 'The Amazing 100', href: '/amazing-100' },
       { label: 'Watch & Listen', href: '/watch' },
       { label: 'Women Entrepreneurs', href: '/women-entrepreneurs' },

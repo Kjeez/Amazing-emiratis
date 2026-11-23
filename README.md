@@ -44,3 +44,14 @@ The database is a file, so host on a server with a persistent disk (a VPS, Railw
 79 photographs from Unsplash (free Unsplash License) illustrate stories, emirates, places and events. They live in `public/images/<slot>.jpg`, are listed with alt text and photographer in `lib/content/photos.json`, and are credited on `/credits`. To swap one, change its entry in `photos.json`, delete the old file and run `node scripts/fetch-photos.mjs`.
 
 Rules followed: no recognisable faces, and captions describe what a photo actually shows (never presenting a stock image as one of the people in a story). Portraits of profiled people remain styled placeholders until real commissioned portraits replace them; pass a `photo` to `<Placeholder>` to use one.
+
+## Common edits
+
+| To change | Edit |
+|---|---|
+| The logo | Put the file in `public/brand/` and fill in `LOGO` in `components/Logo.tsx` |
+| Category bar (top menu) | `NAV` in `lib/content/site.ts` |
+| Social media links | `SOCIALS` in `lib/content/site.ts` (replace the placeholder URLs) |
+| Master Stories (homepage slider) | `lib/content/master.ts` — order, plus optional `headline`, `subheadline`, `summary` per slide |
+| Hide a section (e.g. Health) | `HIDDEN_CATEGORIES` in `lib/content/categories.ts` |
+| Check for broken links | `npm run preview`, then `node scripts/check-links.mjs` |
