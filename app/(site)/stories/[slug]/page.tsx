@@ -6,7 +6,7 @@ import { photo as photoBySlot, storyPhoto, type Photo } from '@/lib/content/phot
 import { getAuthor } from '@/lib/content/authors';
 import { getCategory } from '@/lib/content/categories';
 import { emirateName } from '@/lib/content/emirates';
-import { personHref } from '@/lib/content/people';
+import { getPerson, personHref } from '@/lib/content/people';
 import { getStoryBody, type StoryBlock } from '@/lib/content/story-bodies';
 import { categoryLabel, getStory, longDate, STORIES, storiesByDate, storiesInCategory, type Story } from '@/lib/content/stories';
 import { ReadingProgress, StoryActions } from './StoryTools';
@@ -94,6 +94,8 @@ export default async function StoryPage({ params }: Props) {
 
   const body = getStoryBody(story.slug);
   const author = getAuthor(story.author);
+  // Signed articles (The Leader’s Pen) are credited to the person who wrote them.
+  const writer = story.writer ? getPerson(story.writer) : undefined;
   const label = categoryLabel(story);
   const firstName = author ? author.name.replace(/^Dr\.\s+/, '').split(' ')[0] : '';
   const more = related(story);
@@ -129,7 +131,9 @@ export default async function StoryPage({ params }: Props) {
               <span className={styles.avatar} aria-hidden="true" />
               <span>
                 By{' '}
-                {author ? (
+                {writer ? (
+                  <Link href={`/profiles/${writer.slug}`} className={styles.authorLink}>{writer.name}</Link>
+                ) : author ? (
                   <Link href={`/authors/${author.slug}`} className={styles.authorLink}>{author.name}</Link>
                 ) : (
                   <span className={styles.authorLink}>The Editors</span>
@@ -178,7 +182,9 @@ export default async function StoryPage({ params }: Props) {
             ) : (
               <div className={styles.pending}>
                 <p className={styles.p}>
-                  The full text of this story is still being prepared by our editors and will be published here soon.
+                  {writer
+                    ? 'This article is still being prepared with its author and will be published here soon.'
+                    : 'The full text of this story is still being prepared by our editors and will be published here soon.'}
                 </p>
                 <p className={styles.pendingNote}>
                   Want to know when it goes live? <Link href="/newsletter" className={styles.pendingLink}>Subscribe to the newsletter</Link> and
@@ -196,11 +202,13 @@ export default async function StoryPage({ params }: Props) {
             <div className={styles.authorBox}>
               <span className={styles.authorAvatar} aria-hidden="true" />
               <div className={styles.authorText}>
-                <span className={styles.authorName}>{author ? author.name : 'The Editors'}</span>
+                <span className={styles.authorName}>{writer ? writer.name : author ? author.name : 'The Editors'}</span>
                 <span className={styles.authorBio}>
-                  {author ? author.bio : 'Stories credited to the editors are reported and written by the Amazing Emiratis editorial team.'}
+                  {writer ? `${writer.role}. ${writer.short}` : author ? author.bio : 'Stories credited to the editors are reported and written by the Amazing Emiratis editorial team.'}
                 </span>
-                {author ? (
+                {writer ? (
+                  <Link href={`/profiles/${writer.slug}`} className={styles.authorMore}>Read the profile →</Link>
+                ) : author ? (
                   <Link href={`/authors/${author.slug}`} className={styles.authorMore}>More from {firstName} →</Link>
                 ) : (
                   <Link href="/about" className={styles.authorMore}>About the archive →</Link>

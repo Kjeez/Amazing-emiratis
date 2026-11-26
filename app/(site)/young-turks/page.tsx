@@ -3,10 +3,10 @@ import CollectionPage from '@/components/collections/CollectionPage';
 import { COLLECTIONS } from '@/lib/content/people';
 
 export const metadata: Metadata = {
-  title: 'Women Entrepreneurs',
-  description: 'Emirati women building companies, from venture capital and payments to fashion, coffee and craft.',
+  title: 'Young Turks',
+  description: 'Emirati founders who started their companies in their twenties.',
 };
 
 export default function Page() {
-  return <CollectionPage collection={COLLECTIONS.women} />;
+  return <CollectionPage collection={COLLECTIONS.young} />;
 }

@@ -22,6 +22,8 @@ export type Person = {
   /** One-line summary used on cards. */
   short: string;
   milestones: [year: string, text: string][];
+  /** City and country when the person lives abroad (People Beyond Borders); `emirate` is then where they are from. */
+  basedIn?: string;
   /** Stories about this person (slugs), shown first under "Featured in". */
   stories?: string[];
   /** Videos and podcast episodes about this person (slugs from media.ts). */
@@ -234,25 +236,85 @@ ALL_PEOPLE.push(
   },
 );
 
+// People Beyond Borders: Emiratis building their careers abroad (sample profiles).
+ALL_PEOPLE.push(
+  {
+    slug: 'shamsa-al-neyadi', name: 'Shamsa Al Neyadi', role: 'Quantum Researcher', category: 'Tech', emirate: 'abu-dhabi', winner: false, born: 1990, basedIn: 'Zurich, Switzerland',
+    knownFor: 'Quantum error correction',
+    bio: 'Shamsa Al Neyadi leads a research group in Zurich working on making quantum computers more reliable, one of the field’s hardest open problems.',
+    bio2: 'She grew up in Al Ain, studied physics in Abu Dhabi, and returns every summer to teach a free course for secondary-school students.',
+    short: 'Makes quantum computers more reliable, from a lab in Zurich.',
+    milestones: [['2012', 'Studies physics in Abu Dhabi'], ['2017', 'Completes her doctorate in Zurich'], ['2021', 'Founds her research group'], ['2025', 'Launches a summer course for UAE students']],
+  },
+  {
+    slug: 'rashid-al-suwaidi', name: 'Rashid Al Suwaidi', role: 'Architect', category: 'Culture', emirate: 'ajman', winner: false, born: 1986, basedIn: 'New York, USA',
+    knownFor: 'Libraries and cultural centres',
+    bio: 'Rashid Al Suwaidi is an architect in New York who designs libraries and cultural centres, drawing on the shaded courtyards and wind towers of the Gulf.',
+    bio2: 'His practice has built projects in four countries and is now working on a community library in his home emirate of Ajman.',
+    short: 'Designs libraries and cultural centres inspired by Gulf courtyards.',
+    milestones: [['2010', 'Studies architecture in Sharjah'], ['2015', 'Moves to New York'], ['2019', 'Opens his own practice'], ['2026', 'Begins a library in Ajman']],
+  },
+  {
+    slug: 'hind-al-mulla', name: 'Hind Al Mulla', role: 'Partner, climate investment fund', category: 'Business', emirate: 'dubai', winner: false, born: 1988, basedIn: 'London, UK',
+    knownFor: 'Climate investing',
+    bio: 'Hind Al Mulla is a partner at a London climate-investment fund, backing companies that cut emissions in heavy industry and shipping.',
+    bio2: 'She advises two Emirati start-ups and runs an annual London mentoring programme for finance graduates from the UAE.',
+    short: 'Backs climate companies from London and mentors UAE graduates.',
+    milestones: [['2011', 'Graduates in economics'], ['2016', 'Joins a London investment fund'], ['2021', 'Becomes partner'], ['2025', 'Launches the mentoring programme']],
+  },
+  {
+    slug: 'salem-al-dhaheri', name: 'Salem Al Dhaheri', role: 'Chef & Restaurateur', category: 'Lifestyle', emirate: 'ras-al-khaimah', winner: false, born: 1989, basedIn: 'Tokyo, Japan',
+    knownFor: 'Emirati–Japanese cooking',
+    bio: 'Salem Al Dhaheri runs a small restaurant in Tokyo that pairs Emirati ingredients, such as dates, saffron and dried lime, with Japanese technique.',
+    bio2: 'He hosts young chefs from the Emirates for month-long stages in his kitchen.',
+    short: 'Cooks Emirati flavours with Japanese technique in Tokyo.',
+    milestones: [['2012', 'Trains as a chef in Dubai'], ['2016', 'Moves to Tokyo'], ['2020', 'Opens his restaurant'], ['2025', 'Starts the visiting-chef programme']],
+  },
+  {
+    slug: 'maryam-al-ghaith', name: 'Maryam Al Ghaith', role: 'Marine Biologist', category: 'Community', emirate: 'umm-al-quwain', winner: false, born: 1992, basedIn: 'Sydney, Australia',
+    knownFor: 'Mangrove carbon storage',
+    bio: 'Maryam Al Ghaith is a marine biologist in Sydney who studies how mangroves and seagrass store carbon, work she traces back to childhood summers on the Umm Al Quwain lagoon.',
+    bio2: 'She works with conservation groups in the Emirates on restoring mangrove forests along the coast.',
+    short: 'Studies how mangroves store carbon, from Sydney to the UAE coast.',
+    milestones: [['2014', 'Graduates in marine science'], ['2019', 'Completes her doctorate in Sydney'], ['2022', 'Starts the coastal restoration partnership'], ['2026', 'Publishes the Gulf mangrove survey']],
+  },
+  {
+    slug: 'faisal-al-tayer', name: 'Faisal Al Tayer', role: 'Film Editor', category: 'Culture', emirate: 'dubai', winner: false, born: 1987, basedIn: 'Los Angeles, USA',
+    knownFor: 'Documentary and feature editing',
+    bio: 'Faisal Al Tayer is a film editor in Los Angeles whose work on documentaries and features has screened at international festivals.',
+    bio2: 'He runs an annual workshop in Dubai for aspiring Emirati editors and filmmakers.',
+    short: 'Cuts documentaries and features in Los Angeles; trains editors at home.',
+    milestones: [['2011', 'Studies film in Dubai'], ['2015', 'Moves to Los Angeles'], ['2020', 'First feature as lead editor'], ['2024', 'Starts the Dubai editing workshop']],
+  },
+);
+
 /** Profiles currently shown: everyone outside hidden sections. */
 export const PEOPLE: Person[] = ALL_PEOPLE.filter((p) => !isHiddenCategory(p.category.toLowerCase()));
 
 export type Collection = { slug: string; title: string; titleEm: string; intro: string; cta: string; people: string[] };
 
 /** Curated collections of profiles, each with its own page (/<slug>) and homepage section. */
-export const COLLECTIONS: Record<'women' | 'young', Collection> = {
-  women: {
-    slug: 'women-entrepreneurs',
-    title: 'Women',
-    titleEm: 'Entrepreneurs',
+export const COLLECTIONS: Record<'beyond' | 'she' | 'young', Collection> = {
+  beyond: {
+    slug: 'people-beyond-borders',
+    title: 'People Beyond',
+    titleEm: 'Borders',
+    intro: 'Emiratis building careers and companies abroad, in research, design, finance, food and film, and the ties that bring them home.',
+    cta: 'Know an Emirati making their mark abroad? Put them forward. The editors review every application.',
+    people: ['shamsa-al-neyadi', 'rashid-al-suwaidi', 'hind-al-mulla', 'salem-al-dhaheri', 'maryam-al-ghaith', 'faisal-al-tayer'],
+  },
+  she: {
+    slug: 'she-builds-uae',
+    title: 'She Builds',
+    titleEm: 'UAE',
     intro: 'Emirati women building companies, from venture capital and payments to heritage fashion, coffee and craft.',
     cta: 'Know a founder who belongs here? Tell us about her. The editors review every application.',
     people: ['aisha-al-marri', 'alia-al-shamsi', 'reem-al-shehhi', 'hessa-al-nuaimi', 'noor-al-hammadi', 'mahra-al-ameri'],
   },
   young: {
-    slug: 'young-entrepreneurs',
+    slug: 'young-turks',
     title: 'Young',
-    titleEm: 'Entrepreneurs',
+    titleEm: 'Turks',
     intro: 'Founders who started their companies in their twenties, from games and electric bikes to reforestation and farm-to-table food.',
     cta: 'Know a young founder who belongs here? Put them forward. The editors review every application.',
     people: ['humaid-al-falahi', 'latifa-al-mazrouei', 'sultan-al-ketbi', 'khalifa-al-blooshi', 'mahra-al-ameri', 'noor-al-hammadi'],

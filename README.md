@@ -53,5 +53,7 @@ Rules followed: no recognisable faces, and captions describe what a photo actual
 | Category bar (top menu) | `NAV` in `lib/content/site.ts` |
 | Social media links | `SOCIALS` in `lib/content/site.ts` (replace the placeholder URLs) |
 | Master Stories (homepage slider) | `lib/content/master.ts` — order, plus optional `headline`, `subheadline`, `summary` per slide |
+| Collections (She Builds UAE, Young Turks, People Beyond Borders) | `COLLECTIONS` in `lib/content/people.ts` (names, slugs, who is in each) |
+| The Leader’s Pen articles | `lib/content/stories.ts`: category `leaders-pen`, with `writer` set to the author’s profile slug |
 | Hide a section (e.g. Health) | `HIDDEN_CATEGORIES` in `lib/content/categories.ts` |
 | Check for broken links | `npm run preview`, then `node scripts/check-links.mjs` |

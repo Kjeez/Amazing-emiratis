@@ -70,7 +70,7 @@ function CollectionSection({ collection, id }: { collection: Collection; id: str
         {people.map((p) => (
           <Link key={p.slug} href={`/profiles/${p.slug}`} className={styles.card}>
             <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="3/4" className={styles.cardPh} />
-            <span className={styles.cardCat}>{p.category.toUpperCase()}</span>
+            <span className={styles.cardCat}>{(p.basedIn ?? p.category).toUpperCase()}</span>
             <span className={styles.cardName}>{p.name}</span>
             <span className={styles.cardRole}>{p.role}</span>
           </Link>
@@ -97,7 +97,7 @@ export default function HomePage() {
       <HeroCarousel slides={heroSlides} />
 
       <main className={styles.main}>
-        {/* 2–3. In the Spotlight and Women Entrepreneurs, with News alongside */}
+        {/* In the Spotlight, People Beyond Borders and She Builds UAE, with News alongside */}
         <div className={styles.withRail}>
           <div className={styles.railMain}>
             <section className={styles.section} aria-labelledby="spotlight-title">
@@ -127,7 +127,9 @@ export default function HomePage() {
               </div>
             </section>
 
-            <CollectionSection collection={COLLECTIONS.women} id="women-title" />
+            <CollectionSection collection={COLLECTIONS.beyond} id="beyond-title" />
+
+            <CollectionSection collection={COLLECTIONS.she} id="she-title" />
           </div>
 
           <aside className={styles.rail} aria-labelledby="news-title">
@@ -151,7 +153,7 @@ export default function HomePage() {
           </aside>
         </div>
 
-        {/* 4–5. Young Entrepreneurs and In this issue, with Press Releases alongside */}
+        {/* Young Turks and In this issue, with Press Releases alongside */}
         <div className={styles.withRail}>
           <div className={styles.railMain}>
             <CollectionSection collection={COLLECTIONS.young} id="young-title" />

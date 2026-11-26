@@ -1,4 +1,4 @@
-export type CategoryKey = 'business' | 'culture' | 'health' | 'lifestyle' | 'tech' | 'real-estate';
+export type CategoryKey = 'business' | 'culture' | 'health' | 'lifestyle' | 'tech' | 'real-estate' | 'leaders-pen';
 /** Story categories; Leadership and Community have no section page. */
 export type StoryCategory = CategoryKey | 'leadership' | 'community';
 
@@ -25,6 +25,7 @@ const ALL_CATEGORIES: Category[] = [
   { key: 'lifestyle', label: 'Lifestyle', ar: 'أسلوب حياة', count: 47, people: 33, dek: 'Fashion, food, design and travel through the eyes of the Emiratis who shape them.', subs: ['Fashion', 'Food', 'Design', 'Travel', 'Sport'] },
   { key: 'tech', label: 'Technology', ar: 'تقنية', count: 38, people: 27, dek: 'Engineers, scientists and founders working on AI, space, mobility and climate.', subs: ['AI', 'Space', 'Fintech', 'Mobility', 'Climate'] },
   { key: 'real-estate', label: 'Real Estate', ar: 'عقارات', count: 24, people: 18, dek: 'Developers, architects and investors shaping where Emiratis live and work, from restored old quarters to new communities.', subs: ['Development', 'Housing', 'Investment', 'Design'] },
+  { key: 'leaders-pen', label: 'The Leader’s Pen', ar: 'قلم القائد', count: 12, people: 8, dek: 'Articles written by the country’s leaders and builders in their own words: opinion, memoir and advice, signed by the people who wrote them.', subs: ['Opinion', 'Memoir', 'Advice', 'Letters'] },
 ];
 
 /** Sections currently shown on the site. */
@@ -39,6 +40,7 @@ export const STORY_CATEGORY_LABEL: Record<StoryCategory, string> = {
   lifestyle: 'Lifestyle',
   tech: 'Technology',
   'real-estate': 'Real Estate',
+  'leaders-pen': 'The Leader’s Pen',
   leadership: 'Leadership',
   community: 'Community',
 };
@@ -53,6 +55,7 @@ export const CATEGORY_PEOPLE: Record<CategoryKey, [name: string, role: string][]
   culture: [['Saeed Al Shamsi', 'Poet & Archivist'], ['Maitha Al Mazrouei', 'Visual Artist'], ['Ahmed Al Ali', 'Film Director'], ['Shamma Al Kaabi', 'Museum Curator']],
   health: [['Dr. Noura Al Ketbi', 'Cardiothoracic Surgeon'], ['Dr. Yousef Al Blooshi', 'Geneticist'], ['Mira Al Hosani', 'Clinical Psychologist'], ['Dr. Hind Al Muhairi', 'Paediatrician']],
   lifestyle: [['Hessa Al Nuaimi', 'Creative Director'], ['Sultan Al Mehairbi', 'Chef & Restaurateur'], ['Reem Al Shehhi', 'Fashion Designer'], ['Majid Al Romaithi', 'Endurance Rider']],
+  'leaders-pen': [['Aisha Al Marri', 'Managing Partner, Wadi Capital'], ['Saeed Al Shamsi', 'Poet & Archivist'], ['Mariam Al Falasi', 'AI Researcher'], ['Omar Al Zaabi', 'Youth Mentor']],
   'real-estate': [['Fatima Al Qasimi', 'Founder, Bayt Interiors'], ['Obaid Al Nuaimi', 'Managing Director, Sahil Developments'], ['Mariam Al Rumaithi', 'Architect'], ['Saeed Al Mazrouei', 'Property Investor']],
   tech: [['Mariam Al Falasi', 'AI Researcher'], ['Hazza Al Mansouri', 'Mission Engineer'], ['Alia Al Shamsi', 'Founder, Raqam Pay'], ['Abdulla Al Kaabi', 'Climate Scientist']],
 };

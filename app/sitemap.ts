@@ -12,7 +12,7 @@ import { STORIES } from '@/lib/content/stories';
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = (process.env.SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
   const paths = [
-    '/', '/ar', '/about', '/awards', '/nominate', '/join', '/newsletter', '/events', '/profiles', '/search', '/credits', '/watch', '/press', '/women-entrepreneurs', '/young-entrepreneurs', '/amazing-100',
+    '/', '/ar', '/about', '/awards', '/nominate', '/join', '/newsletter', '/events', '/profiles', '/search', '/credits', '/watch', '/press', '/she-builds-uae', '/young-turks', '/people-beyond-borders', '/amazing-100',
     ...CATEGORIES.map((c) => `/category/${c.key}`),
     ...STORIES.map((s) => `/stories/${s.slug}`),
     ...PEOPLE.map((p) => `/profiles/${p.slug}`),

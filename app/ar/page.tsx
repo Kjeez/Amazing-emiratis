@@ -31,6 +31,8 @@ const NAV: { label: string; href: string }[] = [
   { label: 'عقارات', href: '/category/real-estate' },
   { label: 'فيديو', href: '/watch' },
   { label: 'قائمة المئة', href: '/amazing-100' },
+  { label: 'فعاليات', href: '/events' },
+  { label: 'قلم القائد', href: '/category/leaders-pen' },
 ];
 
 // Arabic headlines for the latest strip (copy from the design); the stories themselves come from lib/content.

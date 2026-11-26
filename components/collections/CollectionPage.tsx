@@ -20,7 +20,7 @@ export default function CollectionPage({ collection }: { collection: Collection 
           <li key={p.slug}>
             <Link href={`/profiles/${p.slug}`} className={styles.card}>
               <Portrait name={p.name} nameAr={p.nameAr} field={p.category} ratio="4/5" />
-              <span className={styles.meta}>{p.category.toUpperCase()} · {emirateName(p.emirate).toUpperCase()}</span>
+              <span className={styles.meta}>{p.basedIn ? `${p.basedIn.toUpperCase()} · FROM ${emirateName(p.emirate).toUpperCase()}` : `${p.category.toUpperCase()} · ${emirateName(p.emirate).toUpperCase()}`}</span>
               <span className={styles.name}>{p.name}</span>
               <span className={styles.role}>{p.role}</span>
               <span className={styles.short}>{p.short}</span>

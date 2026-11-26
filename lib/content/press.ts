@@ -34,10 +34,10 @@ export const PRESS_RELEASES: PressRelease[] = [
   {
     slug: 'entrepreneurs-collections',
     date: '2026-11-03',
-    title: 'New collections celebrate women and young entrepreneurs',
-    summary: 'The archive opens two collections: Women Entrepreneurs and Young Entrepreneurs.',
+    title: 'New collections celebrate women founders, young founders and Emiratis abroad',
+    summary: 'The archive opens three collections: She Builds UAE, Young Turks and People Beyond Borders.',
     body: [
-      'Amazing Emiratis has opened two new collections in its archive: Women Entrepreneurs, celebrating Emirati women building companies, and Young Entrepreneurs, for founders who started their companies in their twenties.',
+      'Amazing Emiratis has opened three new collections in its archive: She Builds UAE, celebrating Emirati women building companies; Young Turks, for founders who started their companies in their twenties; and People Beyond Borders, for Emiratis building careers abroad.',
       'Readers can nominate founders for the collections through the Join the Archive form. Every nomination is reviewed by the editors.',
     ],
   },

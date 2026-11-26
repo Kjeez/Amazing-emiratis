@@ -51,7 +51,9 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
   const facts: { k: string; v: string; href?: string }[] = [
     { k: 'BORN', v: String(p.born) },
-    { k: 'BASED IN', v: emirate, href: emirateHref },
+    ...(p.basedIn
+      ? [{ k: 'BASED IN', v: p.basedIn }, { k: 'FROM', v: emirate, href: emirateHref }]
+      : [{ k: 'BASED IN', v: emirate, href: emirateHref }]),
     { k: 'FIELD', v: p.category, href: catHref },
     { k: 'KNOWN FOR', v: p.knownFor },
   ];

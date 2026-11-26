@@ -130,7 +130,7 @@
 .pressItem { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; }
 .pressSummary { font-size: 13px; line-height: 1.5; color: var(--body); }
 
-/* ------------------------------------------------------------ Collections (Women / Young Entrepreneurs) */
+/* ------------------------------------------------------------ Collections (People Beyond Borders / She Builds UAE / Young Turks) */
 
 .collection { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
 

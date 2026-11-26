@@ -15,12 +15,20 @@ export type Story = {
   dek?: string;
   emirate?: EmirateSlug;
   cover?: boolean;
+  /** Profile slug of the person who wrote it, for signed articles (The Leader’s Pen). */
+  writer?: string;
 };
 
 // Sample catalogue gathered from the design pages. Stories with a full body live in story-bodies.ts.
 const ALL_STORIES: Story[] = [
   // Leadership (compiled from the public record)
   { slug: 'hamdan-bin-mohammed-crown-prince-poet-rider', title: 'Hamdan bin Mohammed: Crown Prince, Poet and Endurance Rider', category: 'leadership', sub: 'Profile', date: '2026-11-17', readMins: 6, dek: 'Dubai’s Crown Prince since 2008 and the UAE’s Minister of Defence since 2024 is also one of the country’s best-known poets, writing as Fazza.', emirate: 'dubai' },
+
+  // The Leader's Pen: articles written by the leaders themselves (sample)
+  { slug: 'patient-capital-is-the-only-kind-that-builds', title: 'Patient Capital Is the Only Kind That Builds Anything', category: 'leaders-pen', sub: 'Opinion', date: '2026-11-24', readMins: 5, writer: 'aisha-al-marri', dek: 'A venture investor on why the best companies are built over a decade, and what founders and funds owe each other along the way.' },
+  { slug: 'thirty-years-recording-poems', title: 'Why I Spent Thirty Years Recording Poems Nobody Asked For', category: 'leaders-pen', sub: 'Memoir', date: '2026-11-19', readMins: 7, writer: 'saeed-al-shamsi', dek: 'A poet and archivist on knocking on elders’ doors, the poem that almost got away, and why memory needs a recorder.' },
+  { slug: 'teach-the-machine-our-dialects', title: 'Teach the Machine to Speak Like Your Grandmother', category: 'leaders-pen', sub: 'Opinion', date: '2026-11-14', readMins: 5, writer: 'mariam-al-falasi', dek: 'An AI researcher on why technology that only understands the newsreader’s Arabic leaves most people out.' },
+  { slug: 'carry-the-opportunity', title: 'Talent Is Everywhere. Carry the Opportunity There.', category: 'leaders-pen', sub: 'Advice', date: '2026-11-08', readMins: 4, writer: 'omar-al-zaabi', dek: 'A youth mentor’s advice to anyone who wants to open a door for a young person.' },
 
   // Business
   { slug: 'family-offices-funding-next-generation-of-founders', title: 'The Family Offices Quietly Funding the Next Generation of Founders', category: 'business', sub: 'Finance', date: '2026-10-12', readMins: 11, author: 'hamad-al-suwaidi', dek: 'How second-generation investors are moving capital from real estate into climate tech, logistics and AI.', emirate: 'abu-dhabi' },
